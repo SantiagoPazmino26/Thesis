@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition>
+	<p:outputPanel rendered="#{not empty list}">
+		<div class="ui-g ui-fluid">
+			<c:forEach var="huiProperty" items="#{list}">
+
+				<div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-4 ui-xl-4">
+					<p:outputLabel rendered="#{huiProperty.isShowLabel()}" value="#{huiProperty.name}" />
+				</div>
+
+				<div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-8 ui-xl-8">
+
+					<c:choose>
+						<!-- Field for PropertyType: booleanoption -->
+						<c:when test="#{huiProperty.isBooleanSelect}">
+							<p:selectBooleanCheckbox value="#{huiProperty.singleSelect}">
+								<p:ajax event="change" listener="#{edit.onChange}"
+									update="groupAccordion" />
+								<f:attribute name="huiProperty" value="#{huiProperty}" />
+							</p:selectBooleanCheckbox>
+						</c:when>
+
+						<!-- Field for PropertyType: line (field in most UIs) -->
+						<c:when test="#{huiProperty.isLine and (not huiProperty.isURL)}">
+							<p:inputText value="#{huiProperty.value}" disabled="#{huiProperty.isDisabled()}">
+								<p:ajax event="change" listener="#{edit.onChange}"
+									update="groupAccordion,:editForm:title" />
+								<f:attribute name="huiProperty" value="#{huiProperty}" />
+							</p:inputText>
+						</c:when>
+
+						<!-- Field for PropertyType: text -->
+						<c:when test="#{huiProperty.isText and (not huiProperty.isURL)}">
+							<p:inputTextarea rows="3" value="#{huiProperty.value}"
+								disabled="#{huiProperty.isDisabled()}">
+								<p:ajax event="change" listener="#{edit.onChange}"
+									update="groupAccordion" />
+								<f:attribute name="huiProperty" value="#{huiProperty}" />
+							</p:inputTextarea>
+						</c:when>
+
+						<!-- Field for PropertyType: date -->
+						<c:when test="#{huiProperty.isDate}">
+							<p:calendar value="#{huiProperty.date}" pages="2" showWeek="true">
+								<p:ajax event="dateSelect" listener="#{edit.onDateSelect}" />
+								<f:attribute name="huiProperty" value="#{huiProperty}" />
+							</p:calendar>
+						</c:when>
+
+						<!-- Field for PropertyType: multiselection -->
+						<c:when test="#{huiProperty.isMultiselect}">
+							<p:selectCheckboxMenu value="#{huiProperty.selectedOptions}"
+								label="#{msgEdit['multiselection.empty']}"
+								filter="true" filterMatchMode="startsWith" updateLabel="true">
+								<f:selectItems value="#{huiProperty.options}"/>
+							</p:selectCheckboxMenu>
+						</c:when>
+
+						<!-- Field for PropertyType: For the case that we have a combobox or
+						whatever we only want to display the text -->
+						<c:when
+							test="#{(not huiProperty.isText) and (not huiProperty.isEditable) and (not huiProperty.isURL)}">
+							<h:outputText value="#{huiProperty.value}" />
+						</c:when>
+
+						<!-- Field for PropertyType: singleoption -->
+						<c:when test="#{huiProperty.isSingleSelect  and (not huiProperty.isURL)}">
+							<p:selectOneMenu value="#{huiProperty.selectedOption}" effectDuration="40"
+								disabled="#{huiProperty.isDisabled()}">
+								<f:selectItems value="#{huiProperty.optionList}" var="option"
+									itemLabel="#{option}" itemValue="#{option}" />
+								<p:ajax event="change" listener="#{edit.onChange}"
+									update="groupAccordion" />
+								<f:attribute name="huiProperty" value="#{huiProperty}" />
+							</p:selectOneMenu>
+						</c:when>
+
+						<!-- Field for PropertyType: numericoption -->
+						<c:when
+							test="#{huiProperty.isNumericSelect and huiProperty.isEditable  and (not huiProperty.isURL)}">
+							<!-- not empty options list -->
+							<p:selectOneMenu rendered="#{not empty huiProperty.optionList}"
+								value="#{huiProperty.selectedOption}" styleClass="hui" effectDuration="40"
+								disabled="#{huiProperty.isDisabled()}">
+								<f:selectItems value="#{huiProperty.optionList}" var="option"
+									itemLabel="#{option}" itemValue="#{option}" />
+								<p:ajax event="change"
+									listener="#{edit.onChangeNumericSelection}"
+									update="groupAccordion" />
+								<f:attribute name="huiProperty" value="#{huiProperty}" />
+							</p:selectOneMenu>
+							<!-- empty option list -->
+							<p:spinner rendered="#{empty huiProperty.optionList}" value="#{huiProperty.value}"
+								min="#{huiProperty.min}" max="#{huiProperty.max}" onkeydown="return false;"
+								styleClass="hui" disabled="{huiProperty.isDisabled()}">
+								<p:ajax event="change" listener="#{edit.onChange}"
+									update="groupAccordion" />
+								<f:attribute name="huiProperty" value="#{huiProperty}" />
+							</p:spinner>
+						</c:when>
+
+						<!-- Field for PropertyType: line (special case: urls) -->
+						<c:when test="#{huiProperty.isLine and huiProperty.isURL}">
+							<p:outputPanel style="margin-bottom: 12px;">
+								<a href="#{huiProperty.URLValue}" target="_blank">#{huiProperty.URLText}</a>
+							</p:outputPanel>
+
+							<p:panel header="#{msgEdit['document.editURL']}" collapsed="true"
+								toggleable="true" toggleSpeed="50">
+								<div class="ui-g">
+									<div class="ui-g-12">
+										<p:inputText placeholder="#{msgEdit['document.URLValue']}"
+											value="#{huiProperty.URLValue}" disabled="#{huiProperty.isDisabled()}">
+											<p:ajax event="change" listener="#{edit.onUrlChange}"
+												update="groupAccordion" />
+											<f:attribute name="huiProperty" value="#{huiProperty}" />
+										</p:inputText>
+									</div>
+
+									<div class="ui-g-12">
+										<p:inputText placeholder="#{msgEdit['document.URLText']}"
+											value="#{huiProperty.URLText}"
+											disabled="#{huiProperty.isDisabled()}">
+											<p:ajax event="change" listener="#{edit.onUrlChange}"
+												update="groupAccordion" />
+											<f:attribute name="huiProperty" value="#{huiProperty}" />
+										</p:inputText>
+									</div>
+									<div class="ui-g-12">
+										<p:commandButton value="#{msgEdit['save']}"
+											action="#{edit.save}" styleClass="button"
+											update=":editForm :tableForm" disabled="#{huiProperty.isDisabled()}" />
+										<p:remoteCommand name="submitEditForm" process="@form"
+											update=":editForm :tableForm :navForm" action="#{edit.save}" />
+									</div>
+								</div>
+							</p:panel>
+						</c:when>
+					</c:choose>
+				</div>
+			</c:forEach>
+		</div>
+	</p:outputPanel>
+</ui:composition>
+</html>
