@@ -3,6 +3,7 @@ package sernet.verinice.dataprotection.catalog;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -54,6 +55,7 @@ import sernet.gs.ui.rcp.main.common.model.DefaultModelLoadListener;
 import sernet.gs.ui.rcp.main.common.model.IModelLoadListener;
 import sernet.gs.ui.rcp.main.preferences.PreferenceConstants;
 import sernet.verinice.bp.rcp.BaseProtectionTreeSorter;
+import sernet.verinice.interfaces.ActionRightIDs;
 import sernet.verinice.iso27k.rcp.ILinkedWithEditorView;
 import sernet.verinice.iso27k.rcp.JobScheduler;
 import sernet.verinice.iso27k.rcp.LinkWithEditorPartListener;
@@ -62,25 +64,22 @@ import sernet.verinice.iso27k.rcp.action.CollapseAction;
 import sernet.verinice.iso27k.rcp.action.DeleteSelectionAction;
 import sernet.verinice.iso27k.rcp.action.ExpandAction;
 import sernet.verinice.iso27k.rcp.action.HideEmptyFilter;
+import sernet.verinice.model.bsi.IBSIStrukturElement;
+import sernet.verinice.model.bsi.IBSIStrukturKategorie;
+import sernet.verinice.model.catalog.CatalogModel;
+import sernet.verinice.model.catalog.ICatalogModelListener;
+import sernet.verinice.model.common.CnATreeElement;
+import sernet.verinice.model.common.TagParameter;
+import sernet.verinice.model.common.TypeParameter;
 import sernet.verinice.rcp.IAttachedToPerspective;
 import sernet.verinice.rcp.RightsEnabledView;
 import sernet.verinice.rcp.ViewFilterAction;
-import sernet.verinice.rcp.bp.BaseProtectionPerspective;
 import sernet.verinice.rcp.catalog.CatalogDragListener;
-import sernet.verinice.rcp.catalog.CatalogModel;
-import sernet.verinice.rcp.catalog.CatalogView;
-import sernet.verinice.rcp.catalog.CnATreeElement;
-import sernet.verinice.rcp.catalog.ElementManager;
-import sernet.verinice.rcp.catalog.IBSIStrukturElement;
-import sernet.verinice.rcp.catalog.IBSIStrukturKategorie;
-import sernet.verinice.rcp.catalog.ICatalogModelListener;
-import sernet.verinice.rcp.catalog.Logger;
-import sernet.verinice.rcp.catalog.TagParameter;
-import sernet.verinice.rcp.catalog.TypeParameter;
-import sernet.verinice.rcp.catalog.CatalogView.MenuListener;
+import sernet.verinice.dataprotection.perspective.DataProtectionPerspective;
 import sernet.verinice.rcp.tree.TreeContentProvider;
 import sernet.verinice.rcp.tree.TreeLabelProvider;
 import sernet.verinice.rcp.tree.TreeUpdateListener;
+import sernet.verinice.service.tree.ElementManager;
 
 public class CatalogView extends RightsEnabledView implements IAttachedToPerspective, ILinkedWithEditorView {
 
@@ -433,7 +432,7 @@ public class CatalogView extends RightsEnabledView implements IAttachedToPerspec
 
     @Override
     public String getPerspectiveId() {
-        return BaseProtectionPerspective.ID;
+        return DataProtectionPerspective.ID;
     }
 
     @Override
@@ -475,4 +474,3 @@ public class CatalogView extends RightsEnabledView implements IAttachedToPerspec
     }
 
 }
-

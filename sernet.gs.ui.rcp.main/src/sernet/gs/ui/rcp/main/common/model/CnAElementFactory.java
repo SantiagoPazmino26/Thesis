@@ -66,6 +66,11 @@ import sernet.verinice.model.bp.groups.ItSystemGroup;
 import sernet.verinice.model.bp.groups.NetworkGroup;
 import sernet.verinice.model.bp.groups.RoomGroup;
 import sernet.verinice.model.bp.groups.SafeguardGroup;
+import sernet.verinice.model.dataprotection.DataProcessKategorie;
+import sernet.verinice.model.dataprotection.DataKategorie;
+import sernet.verinice.model.dataprotection.Data;
+import sernet.verinice.model.dataprotection.DataProcess;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
 import sernet.verinice.model.bsi.Anwendung;
 import sernet.verinice.model.bsi.AnwendungenKategorie;
 import sernet.verinice.model.bsi.BSIModel;
@@ -147,8 +152,10 @@ import sernet.verinice.service.commands.UpdateElement;
 import sernet.verinice.service.commands.crud.CreateBpModel;
 import sernet.verinice.service.commands.crud.CreateCatalogModel;
 import sernet.verinice.service.commands.crud.CreateIsoModel;
+import sernet.verinice.service.commands.crud.CreateDataProtectionModel;
 import sernet.verinice.service.commands.crud.UpdateMultipleElements;
 import sernet.verinice.service.model.LoadModel;
+import sernet.verinice.service.dataprotection.LoadDataProtectionModel;
 
 /**
  * Factory for all model elements. Contains typed factories for sub-elements.
@@ -187,6 +194,8 @@ public final class CnAElementFactory {
     private static ISO27KModel isoModel;
 
     private static BpModel boModel;
+    
+    private static DataProtectionModel dataProtectionModel;
 
     private static CatalogModel catalogModel;
 
@@ -255,6 +264,12 @@ public final class CnAElementFactory {
                 log.debug("Firing safety event: bo model");
             }
             listener.loaded(boModel);
+        }        
+        if (dataProtectionModel != null) {
+            if (log.isDebugEnabled()) {
+                log.debug("Firing safety event: dataprotection model");
+            }
+            listener.loaded(dataProtectionModel);
         }
 
     }
@@ -518,7 +533,16 @@ public final class CnAElementFactory {
         elementbuilders.put(BpDocumentGroup.TYPE_ID, new DefaultElementBuilder(BpDocumentGroup.TYPE_ID));
         elementbuilders.put(BpIncidentGroup.TYPE_ID, new DefaultElementBuilder(BpIncidentGroup.TYPE_ID));
         elementbuilders.put(BpRecordGroup.TYPE_ID, new DefaultElementBuilder(BpRecordGroup.TYPE_ID));
-
+        
+        //Data protection builders
+        elementbuilders.put(DataProcessKategorie.TYPE_ID,
+                new DefaultElementBuilder(DataProcessKategorie.TYPE_ID));
+        elementbuilders.put(Data.TYPE_ID,
+                new DefaultElementBuilder(Data.TYPE_ID));
+        elementbuilders.put(DataProcess.TYPE_ID,
+                new DefaultElementBuilder(DataProcess.TYPE_ID));
+        elementbuilders.put(DataKategorie.TYPE_ID,
+                new DefaultElementBuilder(DataKategorie.TYPE_ID));
     }
 
     public static CnAElementFactory getInstance() {
@@ -660,6 +684,10 @@ public final class CnAElementFactory {
     public static boolean isBpModelLoaded() {
         return (boModel != null);
     }
+    
+    public static boolean isDataProtectionModelLoaded() {
+        return (dataProtectionModel != null);
+    }
 
     public static boolean isModernizedBpCatalogLoaded() {
         return (catalogModel != null);
@@ -711,6 +739,12 @@ public final class CnAElementFactory {
             listener.loaded(model);
         }
     }
+    
+    private void fireLoad(DataProtectionModel model) {
+        for (IModelLoadListener listener : listeners) {
+            listener.loaded(model);
+        }
+    }
 
     private void fireLoad(CatalogModel model) {
         for (IModelLoadListener listener : listeners) {
@@ -740,7 +774,9 @@ public final class CnAElementFactory {
             model = CnAElementFactory.getInstance().getISO27kModel();
         } else if (element instanceof BpModel || element instanceof IBpElement) {
             model = CnAElementFactory.getInstance().getBpModel();
-        } else {
+        } else if (element instanceof DataProtectionModel) {
+            model = CnAElementFactory.getInstance().getBpModel();
+        }  else {
             model = CnAElementFactory.getLoadedModel();
         }
         return model;
@@ -769,6 +805,21 @@ public final class CnAElementFactory {
             if (boModel == null) {
                 boModel = loadBpModel();
                 if (boModel == null) {
+                    createBpModel();
+                }
+            }
+        }
+        return boModel;
+    }
+    
+    public DataProtectionModel getDataProtectionModel() {
+        if (dataProtectionModel != null) {
+            return dataProtectionModel;
+        }
+        synchronized (mutex) {
+            if (dataProtectionModel == null) {
+            	dataProtectionModel = loadBpModel();
+                if (dataProtectionModel == null) {
                     createBpModel();
                 }
             }
@@ -887,6 +938,40 @@ public final class CnAElementFactory {
             }
             if (boModel != null) {
                 fireLoad(boModel);
+            }
+
+        } catch (CommandException e) {
+            log.error(Messages.getString("CnAElementFactory.2"), e); //$NON-NLS-1$
+        }
+
+    }
+    
+    private DataProtectionModel loadDataProtectionModel() {
+        DataProtectionModel model = null;
+        try {
+            LoadDataProtectionModel modelLoadCommand = new LoadDataProtectionModel();
+            modelLoadCommand = getCommandService().executeCommand(modelLoadCommand);
+            model = modelLoadCommand.getModel();
+            if (model != null) {
+                fireLoad(model);
+            }
+        } catch (CommandException e) {
+            log.error("Error loading model for Data protection", e);
+            throw new RuntimeException("Error loading model for Data protection", e);
+        }
+        return model;
+    }
+
+    private void createDataProtectionModel() {
+        try {
+            CreateDataProtectionModel modelCreationCommand = new CreateDataProtectionModel();
+            modelCreationCommand = getCommandService().executeCommand(modelCreationCommand);
+            dataProtectionModel = modelCreationCommand.getElement();
+            if (log.isInfoEnabled()) {
+                log.info("Model for data protection created"); //$NON-NLS-1$
+            }
+            if (dataProtectionModel != null) {
+                fireLoad(dataProtectionModel);
             }
 
         } catch (CommandException e) {

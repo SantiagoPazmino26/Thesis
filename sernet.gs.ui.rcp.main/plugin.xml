@@ -43,12 +43,11 @@
             id="sernet.verinice.rcp.bp.BaseProtectionPerspective"
             name="%perspective.name.bp">
       </perspective>
-      </perspective>
-            <perspective
-            class="sernet.verinice.rcp.bp.BaseProtectionPerspective"
+      <perspective
+            class="sernet.verinice.dataprotection.perspective.DataProtectionPerspective"
             icon="icons/base-protection/base_protection_perspective.png"
-            id="sernet.verinice.rcp.bp.BaseProtectionPerspective"
-            name="%perspective.name.bp">
+            id="sernet.verinice.dataprotection.perspective.DataProtectionPerspective"
+            name="%perspective.name.3">
       </perspective>
       
       
@@ -239,8 +238,25 @@
             id="sernet.verinice.rcp.catalog.CatalogView"
             name="%view.name.catalog"
             restorable="true">
-      </view>      
-      
+      </view>
+      <view
+            allowMultiple="false"
+            category="sernet.verinice.dataprotection.catalog"
+            class="sernet.verinice.dataprotection.catalog.CatalogView"
+            icon="icons/catalog-view.png"
+            id="sernet.verinice.dataprotection.catalog.CatalogView"
+            name="%view.name.catalog.2"
+            restorable="true">
+      </view>        
+      <view
+            allowMultiple="false"
+            category="sernet.verinice.dataprotection.views"
+            class="sernet.verinice.dataprotection.views.DataProtectionView"
+            icon="icons/base-protection/base_protection_view.png"
+            id="sernet.verinice.dataprotection.views.DataProtectionView"
+            name="%view.name.21"
+            restorable="true">
+      </view>   
       
    </extension>
    <extension point="org.eclipse.ui.commands">
@@ -2113,7 +2129,20 @@
                tooltip="%action.tooltip.import_catalog">
          </action>
       </viewContribution>
-            
+      <viewContribution
+            id="sernet.verinice.dataprotection.catalog.action.ImportCatalog"
+            targetID="sernet.verinice.dataprotection.catalog.CatalogView">
+         <action
+               class="sernet.verinice.dataprotection.actions.ImportCatalogAction"
+               icon="icons/import.gif"
+               id="sernet.verinice.dataprotection.actions.ImportCatalogAction"
+               label="%action.label.import_catalog"
+               state="true"
+               style="push"
+               toolbarPath="additions"
+               tooltip="%action.tooltip.import_catalog">
+         </action>
+      </viewContribution>            
    </extension>
    <extension point="org.eclipse.ui.handlers">
       <handler class="sernet.verinice.iso27k.rcp.action.CopyHandler"

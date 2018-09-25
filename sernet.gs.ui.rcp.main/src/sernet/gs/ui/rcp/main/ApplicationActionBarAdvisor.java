@@ -78,7 +78,7 @@ import sernet.gs.ui.rcp.main.preferences.PreferenceConstants;
 import sernet.gs.ui.rcp.main.preferences.ShowPreferencesAction;
 import sernet.verinice.bp.rcp.BaseProtectionView;
 import sernet.verinice.bpm.rcp.OpenTaskViewAction;
-import sernet.verinice.dataprotection.perpective.DataProtectionPerspective;
+import sernet.verinice.dataprotection.perspective.DataProtectionPerspective;
 import sernet.verinice.interfaces.ActionRightIDs;
 import sernet.verinice.iso27k.rcp.CatalogView;
 import sernet.verinice.iso27k.rcp.ISMView;
