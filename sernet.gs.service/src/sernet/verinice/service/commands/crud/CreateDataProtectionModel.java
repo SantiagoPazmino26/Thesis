@@ -1,5 +1,7 @@
 package sernet.verinice.service.commands.crud;
 
+import org.apache.log4j.Logger;
+
 import sernet.gs.service.RuntimeCommandException;
 import sernet.verinice.interfaces.CommandException;
 import sernet.verinice.model.common.ChangeLogEntry;

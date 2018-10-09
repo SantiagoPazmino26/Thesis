@@ -48,9 +48,9 @@ public interface IModelLoadListener {
 	void loaded(BpModel model);
 	
 	/**
-	 * Method is called when an {@link BpModel} is loaded or created
+	 * Method is called when an {@link DataProtectionModel} is loaded or created
 	 * 
-	 * @param model a new loaded or created {@link BpModel}
+	 * @param model a new loaded or created {@link DataProtectionModel}
 	 */
 	void loaded(DataProtectionModel model);
 

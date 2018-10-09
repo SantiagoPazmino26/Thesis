@@ -2,8 +2,19 @@ package sernet.verinice.model.dataprotection;
 
 import java.util.Collection;
 
+import sernet.hui.common.connect.Entity;
+import sernet.hui.common.connect.HUITypeFactory;
+import sernet.hui.common.connect.Property;
+import sernet.hui.common.connect.PropertyList;
+import sernet.hui.common.connect.PropertyType;
+import sernet.hui.common.multiselectionlist.IMLPropertyOption;
+import sernet.verinice.interfaces.IReevaluatorProtectionGoals;
+import sernet.verinice.model.bsi.IBSIStrukturElement;
+import sernet.verinice.model.bsi.MaximumProtectionRequirementsListener;
+import sernet.verinice.model.bsi.TagHelper;
 import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.ILinkChangeListener;
+import org.apache.log4j.Logger;
 
 public class DataProcess extends CnATreeElement
 implements IBSIStrukturElement {
@@ -17,14 +28,14 @@ implements IBSIStrukturElement {
         return log;
     }
 	
-	public static final String PROP_TAG			= "process_tag"; //$NON-NLS-1$
-	public static final String PROP_NAME = "process_name"; //$NON-NLS-1$
-	public static final String PROP_KUERZEL = "process_kuerzel"; //$NON-NLS-1$
+	public static final String PROP_TAG			= "data_process_tag"; //$NON-NLS-1$
+	public static final String PROP_NAME = "data_process_name"; //$NON-NLS-1$
+	public static final String PROP_KUERZEL = "data_process_kuerzel"; //$NON-NLS-1$
 
 	// ID must correspond to entity definition in entitytype XML description:
-	public static final String TYPE_ID = "process"; //$NON-NLS-1$
-	public static final String PROP_ERLAEUTERUNG = "process_erlaeuterung"; //$NON-NLS-1$
-	public static final String PROP_ANZAHL = "process_anzahl"; //$NON-NLS-1$
+	public static final String TYPE_ID = "data_process"; //$NON-NLS-1$
+	public static final String PROP_ERLAEUTERUNG = "data_process_erlaeuterung"; //$NON-NLS-1$
+	public static final String PROP_ANZAHL = "data_process_anzahl"; //$NON-NLS-1$
 	
 	private final IReevaluatorProtectionGoals schutzbedarfProvider 
 	= new ProtectionGoalsAdapter(this);
@@ -125,3 +136,4 @@ implements IBSIStrukturElement {
         return "Person [getFullName()=" + getName() + ", getKuerzel()=" + getKuerzel()
                 + ", getId()=" + getId() + "]";
     }
+}

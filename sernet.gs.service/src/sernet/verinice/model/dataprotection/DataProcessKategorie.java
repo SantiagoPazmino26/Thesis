@@ -1,5 +1,6 @@
 package sernet.verinice.model.dataprotection;
 
+import sernet.verinice.model.bsi.IBSIStrukturKategorie;
 import sernet.verinice.model.common.CnATreeElement;
 
 public class DataProcessKategorie extends CnATreeElement 

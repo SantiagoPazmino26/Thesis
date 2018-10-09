@@ -87,6 +87,7 @@ import sernet.verinice.model.catalog.CatalogModel;
 import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.TagParameter;
 import sernet.verinice.model.common.TypeParameter;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
 import sernet.verinice.model.iso27k.ISO27KModel;
 import sernet.verinice.rcp.IAttachedToPerspective;
 import sernet.verinice.rcp.ViewFilterAction;
@@ -249,6 +250,11 @@ public class BaseProtectionView extends RightsEnabledView
 
                     @Override
                     public void loaded(CatalogModel model) { /* nothing to do */ }
+					@Override
+					public void loaded(DataProtectionModel model) {
+						// do nothing
+						
+					}
                 };
                 CnAElementFactory.getInstance().addLoadListener(modelLoadListener);             
             }

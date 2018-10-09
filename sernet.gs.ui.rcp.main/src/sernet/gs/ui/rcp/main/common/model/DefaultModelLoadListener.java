@@ -22,6 +22,7 @@ package sernet.gs.ui.rcp.main.common.model;
 import sernet.verinice.model.bp.elements.BpModel;
 import sernet.verinice.model.bsi.BSIModel;
 import sernet.verinice.model.catalog.CatalogModel;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
 import sernet.verinice.model.iso27k.ISO27KModel;
 
 /**
@@ -51,5 +52,9 @@ public class DefaultModelLoadListener implements IModelLoadListener {
     @Override
     public void closed(BSIModel model) {
     }
+
+	@Override
+	public void loaded(DataProtectionModel model) {	
+	}
 
 }

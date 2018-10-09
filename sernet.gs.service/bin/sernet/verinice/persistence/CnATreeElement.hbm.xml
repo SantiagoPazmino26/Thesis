@@ -664,5 +664,36 @@
         <filter-param name="scopeId" type="int"/>
     </filter-def>
 
+		<!-- Data Protection -->
+ 
+	<subclass 
+		name="sernet.verinice.model.dataprotection.DataProtectionModel"
+		extends="CnATreeElement"
+		discriminator-value="dataprotection_model" />	
+
+	<subclass 
+		name="sernet.verinice.model.dataprotection.DataNetwork"
+		extends="CnATreeElement"
+		discriminator-value="data_network" />
+		
+	<subclass 
+		name="sernet.verinice.model.dataprotection.DataKategorie"
+		extends="CnATreeElement"
+		discriminator-value="datakategorie" />
+		
+	<subclass 
+		name="sernet.verinice.model.dataprotection.DataProcessKategorie"
+		extends="CnATreeElement"
+		discriminator-value="processkategorie" />							
+
+	<subclass 
+		name="sernet.verinice.model.dataprotection.DataProcess"
+		extends="CnATreeElement"
+		discriminator-value="data_process" />							
+
+	<subclass 
+		name="sernet.verinice.model.dataprotection.Data"
+		extends="CnATreeElement"
+		discriminator-value="data" />
 	
 </hibernate-mapping>

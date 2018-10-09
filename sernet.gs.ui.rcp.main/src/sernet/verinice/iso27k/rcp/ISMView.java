@@ -95,6 +95,7 @@ import sernet.verinice.model.catalog.CatalogModel;
 import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.TagParameter;
 import sernet.verinice.model.common.TypeParameter;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
 import sernet.verinice.model.iso27k.Asset;
 import sernet.verinice.model.iso27k.AssetGroup;
 import sernet.verinice.model.iso27k.Audit;
@@ -329,6 +330,12 @@ public class ISMView extends RightsEnabledView implements ILinkedWithEditorView 
                     public void loaded(CatalogModel model) {
                         // nothing to do
                     }
+
+					@Override
+					public void loaded(DataProtectionModel model) {
+						// do nothing
+						
+					}
 
 	            };
 	            CnAElementFactory.getInstance().addLoadListener(modelLoadListener);

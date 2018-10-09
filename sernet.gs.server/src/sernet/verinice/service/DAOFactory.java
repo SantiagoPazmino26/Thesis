@@ -104,6 +104,12 @@ import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.Permission;
 import sernet.verinice.model.common.accountgroup.AccountGroup;
 import sernet.verinice.model.common.configuration.Configuration;
+import sernet.verinice.model.dataprotection.Data;
+import sernet.verinice.model.dataprotection.DataKategorie;
+import sernet.verinice.model.dataprotection.DataNetwork;
+import sernet.verinice.model.dataprotection.DataProcess;
+import sernet.verinice.model.dataprotection.DataProcessKategorie;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
 import sernet.verinice.model.ds.Datenverarbeitung;
 import sernet.verinice.model.ds.Personengruppen;
 import sernet.verinice.model.ds.StellungnahmeDSB;
@@ -802,6 +808,63 @@ public class DAOFactory implements IDAOFactory {
     public void setSamtTopicDAO(IBaseDao<SamtTopic, Integer> daoToSet) {
         daosByClass.put(SamtTopic.class, daoToSet);
         daosByTypeID.put(SamtTopic.TYPE_ID, daoToSet);
+    }
+    
+    /*Data Protection Daos*/
+    
+    /** 
+     * Setter method used by spring to inject DAO.
+     */
+    
+    @Override
+    public void setDataProtectionModelDAO(IBaseDao<DataProtectionModel, Integer> daoToSet) {
+        daosByClass.put(DataProtectionModel.class, daoToSet);
+        daosByTypeID.put(DataProtectionModel.TYPE_ID, daoToSet);        
+    }
+    
+    /** 
+     * Setter method used by spring to inject DAO.
+     */
+    @Override
+    public void setDataNetworkDAO(IBaseDao<DataNetwork, Integer> daoToSet) {
+        daosByClass.put(DataNetwork.class, daoToSet);
+        daosByTypeID.put(DataNetwork.TYPE_ID, daoToSet);
+    }
+    
+    /** 
+     * Setter method used by spring to inject DAO.
+     */
+    @Override
+    public void setDataKategorieDAO(IBaseDao<DataKategorie, Integer> daoToSet) {
+        daosByClass.put(DataKategorie.class, daoToSet);
+        daosByTypeID.put(DataKategorie.TYPE_ID, daoToSet);
+    }
+    
+    /** 
+     * Setter method used by spring to inject DAO.
+     */
+    @Override
+    public void setDataProcessKategorieDAO(IBaseDao<DataProcessKategorie, Integer> daoToSet) {
+        daosByClass.put(DataProcessKategorie.class, daoToSet);
+        daosByTypeID.put(DataProcessKategorie.TYPE_ID, daoToSet);
+    }
+    
+    /** 
+     * Setter method used by spring to inject DAO.
+     */
+    @Override
+    public void setDataProcessDAO(IBaseDao<DataProcess, Integer> daoToSet) {
+        daosByClass.put(DataProcess.class, daoToSet);
+        daosByTypeID.put(DataProcess.TYPE_ID, daoToSet);
+    }
+    
+    /** 
+     * Setter method used by spring to inject DAO.
+     */
+    @Override
+    public void setDataDAO(IBaseDao<Data, Integer> daoToSet) {
+        daosByClass.put(Data.class, daoToSet);
+        daosByTypeID.put(Data.TYPE_ID, daoToSet);
     }
     
     /* Miscellaneous Daos */

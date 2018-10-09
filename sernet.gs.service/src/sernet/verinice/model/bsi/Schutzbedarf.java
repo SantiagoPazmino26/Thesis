@@ -26,14 +26,26 @@ public final class Schutzbedarf {
 	public static final String VERTRAULICHKEIT 	= "_vertraulichkeit"; //$NON-NLS-1$
 	public static final String VERFUEGBARKEIT 		= "_verfuegbarkeit"; //$NON-NLS-1$
 	public static final String INTEGRITAET 		= "_integritaet"; //$NON-NLS-1$
+	public static final String TRANSPARENCY 	= "_transparency"; //$NON-NLS-1$
+	public static final String INTERVENEABILITY 		= "_interveneability"; //$NON-NLS-1$
+	public static final String UNLINKABILITY 		= "_unlinkability"; //$NON-NLS-1$
+	public static final String DATA_MINIMIZATION 		= "_data_minimization"; //$NON-NLS-1$
 	
 	private static Pattern patVertraulichkeit = Pattern.compile(".*" + VERTRAULICHKEIT + "$"); //$NON-NLS-1$ //$NON-NLS-2$
 	private static Pattern patVerfuegbarkeit = Pattern.compile(".*" + VERFUEGBARKEIT + "$"); //$NON-NLS-1$ //$NON-NLS-2$
 	private static Pattern patIntegritaet = Pattern.compile(".*" + INTEGRITAET + "$"); //$NON-NLS-1$ //$NON-NLS-2$
+	private static Pattern patTransparency = Pattern.compile(".*" + TRANSPARENCY + "$"); //$NON-NLS-1$ //$NON-NLS-2$
+	private static Pattern patInterveneability = Pattern.compile(".*" + INTERVENEABILITY + "$"); //$NON-NLS-1$ //$NON-NLS-2$
+	private static Pattern patUnlinkability = Pattern.compile(".*" + UNLINKABILITY + "$"); //$NON-NLS-1$ //$NON-NLS-2$
+	private static Pattern patDataMinimization = Pattern.compile(".*" + DATA_MINIMIZATION + "$"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	public static final String VERTRAULICHKEIT_BEGRUENDUNG	= "_vertraulichkeit_begruendung"; //$NON-NLS-1$
 	public static final String VERFUEGBARKEIT_BEGRUENDUNG	= "_verfuegbarkeit_begruendung"; //$NON-NLS-1$
 	public static final String INTEGRITAET_BEGRUENDUNG		= "_integritaet_begruendung"; //$NON-NLS-1$
+	public static final String TRANSPARENCY_BEGRUENDUNG	    = "_transparency_begruendung"; //$NON-NLS-1$
+	public static final String INTERVENEABILITY_BEGRUENDUNG	= "_interveneability_begruendung"; //$NON-NLS-1$
+	public static final String UNLINKABILITY_BEGRUENDUNG		= "_unlinkability_begruendung"; //$NON-NLS-1$
+	public static final String DATA_MINIMIZATION_BEGRUENDUNG		= "_data_minimization_begruendung"; //$NON-NLS-1$
 
 	public static final String SUFFIX_NONE 		= ""; //$NON-NLS-1$
 	public static final String SUFFIX_NORMAL 		= "_normal"; //$NON-NLS-1$
@@ -77,6 +89,23 @@ public final class Schutzbedarf {
 	public static boolean isIntegritaet(Property prop) {
 		return patIntegritaet.matcher(prop.getPropertyTypeID()).matches();
 	}
+	
+	public static boolean isTransparency(Property prop) {
+		return patTransparency.matcher(prop.getPropertyTypeID()).matches();
+	}
+	
+	public static boolean isInterveneability(Property prop) {
+		return patInterveneability.matcher(prop.getPropertyTypeID()).matches();
+	}
+	
+	public static boolean isUnlinkability(Property prop) {
+		return patUnlinkability.matcher(prop.getPropertyTypeID()).matches();
+	}
+	
+	public static boolean isDataMinimization(Property prop) {
+		return patDataMinimization.matcher(prop.getPropertyTypeID()).matches();
+	}
+
 
 	public static String toOption(String typeId, String schutzbedarf, int level) {
 		StringBuffer buf = new StringBuffer();
@@ -113,6 +142,22 @@ public final class Schutzbedarf {
 		return prop.getPropertyTypeID().indexOf(INTEGRITAET_BEGRUENDUNG) != -1;
 	}
 	
+	public static boolean isTransparencyBegruendung(Property prop) {
+		return prop.getPropertyTypeID().indexOf(TRANSPARENCY_BEGRUENDUNG) != -1;
+	}
+	
+	public static boolean isInterveneabilityBegruendung(Property prop) {
+		return prop.getPropertyTypeID().indexOf(INTERVENEABILITY_BEGRUENDUNG) != -1;
+	}
+	
+	public static boolean isUnlinkabilityBegruendung(Property prop) {
+		return prop.getPropertyTypeID().indexOf(UNLINKABILITY_BEGRUENDUNG) != -1;
+	}
+	
+	public static boolean isDataMinimizationBegruendung(Property prop) {
+		return prop.getPropertyTypeID().indexOf(DATA_MINIMIZATION_BEGRUENDUNG) != -1;
+	}
+	
 	public static boolean isVerfuegbarkeitBegruendung(String prop) {
 		return prop.indexOf(VERFUEGBARKEIT_BEGRUENDUNG) != -1;
 	}
@@ -123,6 +168,22 @@ public final class Schutzbedarf {
 	
 	public static boolean isIntegritaetBegruendung(String prop) {
 		return prop.indexOf(INTEGRITAET_BEGRUENDUNG) != -1;
+	}
+	
+	public static boolean isTransparencyBegruendung(String prop) {
+		return prop.indexOf(TRANSPARENCY_BEGRUENDUNG) != -1;
+	}
+	
+	public static boolean isInterveneabilityBegruendung(String prop) {
+		return prop.indexOf(INTERVENEABILITY_BEGRUENDUNG) != -1;
+	}
+	
+	public static boolean isUnlinkabilityBegruendung(String prop) {
+		return prop.indexOf(UNLINKABILITY_BEGRUENDUNG) != -1;
+	}
+	
+	public static boolean isDataMinimizationBegruendung(String prop) {
+		return prop.indexOf(DATA_MINIMIZATION_BEGRUENDUNG) != -1;
 	}
 
 	public static boolean isMgmtReviewNeeded(String propertyValue) {

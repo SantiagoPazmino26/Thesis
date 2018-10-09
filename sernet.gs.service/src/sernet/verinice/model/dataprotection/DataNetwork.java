@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import sernet.verinice.model.bp.IBpElement;
 import sernet.verinice.model.bp.elements.BpRequirement;
-import sernet.verinice.model.bp.elements.ITaggableElement;
+import sernet.hui.common.connect.ITaggableElement;
 import sernet.verinice.model.bp.groups.ApplicationGroup;
 import sernet.verinice.model.bp.groups.BpDocumentGroup;
 import sernet.verinice.model.bp.groups.BpIncidentGroup;
@@ -32,7 +32,7 @@ public class DataNetwork extends CnATreeElement implements IBpElement, ITaggable
     
     private static final long serialVersionUID = 0L;
        
-    public static final String TYPE_ID = "data_netowrk"; //$NON-NLS-1$
+    public static final String TYPE_ID = "data_network"; //$NON-NLS-1$
     public static final String PROP_NAME = "data_network_name"; //$NON-NLS-1$
     public static final String PROP_TAG = "data_network_tag"; //$NON-NLS-1$
     public static final String PROP_QUALIFIER = "data_network_qualifier"; //$NON-NLS-1$

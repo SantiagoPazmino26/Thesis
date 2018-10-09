@@ -163,7 +163,7 @@ public class DataProtectionModel extends CnATreeElement implements IDpRoot {
         }
     }
     
-    public void removeBpModelListener(IDpModelListener listener) {
+    public void removeDataProtectionModelListener(IDpModelListener listener) {
         if (getListeners().contains(listener)){
             getListeners().remove(listener);
         }
@@ -180,7 +180,7 @@ public class DataProtectionModel extends CnATreeElement implements IDpRoot {
             newModel.addModITBOModelListener(listener);
         }
         for (IDpModelListener listener : getListeners()) {
-            removeBpModelListener(listener);
+            removeDataProtectionModelListener(listener);
         }      
     }    
     

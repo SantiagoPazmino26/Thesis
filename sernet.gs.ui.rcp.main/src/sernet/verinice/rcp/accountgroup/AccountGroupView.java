@@ -86,6 +86,7 @@ import sernet.verinice.model.bp.elements.BpModel;
 import sernet.verinice.model.bsi.BSIModel;
 import sernet.verinice.model.catalog.CatalogModel;
 import sernet.verinice.model.common.configuration.Configuration;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
 import sernet.verinice.model.iso27k.ISO27KModel;
 import sernet.verinice.rcp.RightsEnabledView;
 import sernet.verinice.rcp.account.AccountWizard;
@@ -182,6 +183,11 @@ public class AccountGroupView extends RightsEnabledView
             public void loaded(CatalogModel model) {
                 // nothing to do
             }
+
+			@Override
+			public void loaded(DataProtectionModel model) {
+				// nothing to do				
+			}
         };
         CnAElementFactory.getInstance().addLoadListener(modelLoadListener);
     }
@@ -881,5 +887,11 @@ public class AccountGroupView extends RightsEnabledView
     public void loaded(CatalogModel model) {
         // nothing to do
     }
+
+	@Override
+	public void loaded(DataProtectionModel model) {
+		// nothing to do
+		
+	}
 
 }

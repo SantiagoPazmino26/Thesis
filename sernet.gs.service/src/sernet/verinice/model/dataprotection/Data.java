@@ -14,8 +14,10 @@ import sernet.hui.common.connect.Property;
 import sernet.hui.common.connect.PropertyList;
 import sernet.hui.common.connect.PropertyType;
 import sernet.hui.common.multiselectionlist.IMLPropertyOption;
-import sernet.verinice.interfaces.IReevaluator;
 import sernet.verinice.interfaces.IReevaluatorProtectionGoals;
+import sernet.verinice.model.bsi.IBSIStrukturElement;
+import sernet.verinice.model.bsi.MaximumProtectionRequirementsListener;
+import sernet.verinice.model.bsi.TagHelper;
 import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.ILinkChangeListener;
 

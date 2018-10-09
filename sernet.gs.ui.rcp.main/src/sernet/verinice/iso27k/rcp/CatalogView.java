@@ -79,6 +79,7 @@ import sernet.verinice.model.bp.elements.BpModel;
 import sernet.verinice.model.bsi.Attachment;
 import sernet.verinice.model.bsi.BSIModel;
 import sernet.verinice.model.catalog.CatalogModel;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
 import sernet.verinice.model.iso27k.ISO27KModel;
 import sernet.verinice.rcp.IAttachedToPerspective;
 import sernet.verinice.rcp.RightsEnabledView;
@@ -298,6 +299,12 @@ public class CatalogView extends RightsEnabledView implements IAttachedToPerspec
                     public void loaded(CatalogModel model) {
                         // nothing to do
                     }
+
+					@Override
+					public void loaded(DataProtectionModel model) {
+						// do nothing
+						
+					}
 					
 				};
 				CnAElementFactory.getInstance().addLoadListener(modelLoadListener);

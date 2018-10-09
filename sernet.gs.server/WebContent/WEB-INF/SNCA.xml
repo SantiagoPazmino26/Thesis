@@ -10922,4 +10922,723 @@ Wurden bereits weitere Stellen informiert?
             inputtype="text"
             showInObjectBrowser="true" />
     </huientity>
+    
+<!-- Start: Data Protection entities -->
+
+	<!-- Start: Data network entity -->
+
+    <huientity id="data_network" name="Data Network">
+        <huiproperty id="data_network_name" name="Title" required="true" />
+        <huiproperty id="data_network_abbr" name="Abbreviation" />
+        <huiproperty id="data_network_tag" name="Tags" tooltip="List of tags, separated by comma or space" />
+        <huiproperty id="data_network_description" name="Description" />
+        <huiproperty id="data_network_qualifier" name="Qualifier" required="true" inputtype="singleoption" >
+                <option id="data_network_qualifier_basic" name="BASIC" value="0"/>
+                <option id="data_network_qualifier_standard" name="STANDARD" value="1"/>
+                <option id="data_network_qualifier_high" name="HIGH" value="2"/>
+        </huiproperty>
+        <huiproperty id="data_network_document" isURL="true" name="Document" />
+        <huipropertygroup id="data_network_report" name="Reporting" tags="Dok.mgmt.">
+            <huiproperty id="data_network_author" name="Author" tags="Dok.mgmt." />
+            <huiproperty id="data_network_version" name="Version" tags="Dok.mgmt." />
+            <huiproperty id="data_network_approved" name="Approved by" tags="Dok.mgmt." />
+        </huipropertygroup>
+        <huipropertygroup id="data_network_group_business_impact" name="Protection Requirement"
+            tags="Risk">
+            <huiproperty defaultValue="0" id="data_network_value_method_confidentiality" inputtype="booleanoption" name="Deduce confidentiality with maximumpriciple" tags="Risk"/>
+            <huiproperty defaultValue="0" id="data_network_method_confidentiality" inputtype="numericoption" max="2" min="0" name="Deduce confidentiality (other)" tags="Risk">
+              <depends option="data_network_value_method_confidentiality" value="0"/>
+              <option id="data_network_value_method_confidentiality_none" name="unedited" value="0"/>
+              <option id="data_network_value_method_confidentiality_dist" name="distribution effect" value="1"/>
+              <option id="data_network_value_method_confidentiality_acc" name="accumulation effect" value="2"/>
+            </huiproperty>
+            <huiproperty id="data_network_value_confidentiality" inputtype="numericoption" max="4" min="0" name="confidentiality" tags="Risk">
+              <depends option="data_network_value_method_confidentiality" value="0"/>
+              <option id="data_network_value_confidentiality_unedited" name="Unedited" value="0"/>
+              <option id="data_network_value_confidentiality_low" name="Insignificant" value="1"/>
+              <option id="data_network_value_confidentiality_normal" name="Normal" value="2"/>
+              <option id="data_network_value_confidentiality_high" name="High" value="3"/>
+              <option id="data_network_value_confidentiality_very_high" name="Very High" value="4"/>
+            </huiproperty>
+            <huiproperty id="data_network_value_comment_c" inputtype="text" name="Explanation Confidentiality" tags="Risk"/>
+            <huiproperty defaultValue="0" id="data_network_value_method_integrity" inputtype="booleanoption" name="Deduce integrity with maximumpriciple" tags="Risk"/>
+            <huiproperty defaultValue="0" id="data_network_method_integrity" inputtype="numericoption" max="2" min="0" name="Deduce integrity (other)" tags="Risk">
+              <depends option="data_network_value_method_integrity" value="0"/>
+              <option id="data_network_value_method_integrity_none" name="unedited" value="0"/>
+              <option id="data_network_value_method_integrity_dist" name="distribution effect" value="1"/>
+              <option id="data_network_value_method_integrity_acc" name="accumulation effect" value="2"/>
+            </huiproperty>
+            <huiproperty id="data_network_value_integrity" inputtype="numericoption" max="4" min="0" name="integrity" tags="Risk">
+              <depends option="data_network_value_method_integrity" value="0"/>
+              <option id="data_network_value_integrity_unedited" name="Unedited" value="0"/>
+              <option id="data_network_value_integrity_low" name="Insignificant" value="1"/>
+              <option id="data_network_value_integrity_normal" name="Normal" value="2"/>
+              <option id="data_network_value_integrity_high" name="High" value="3"/>
+              <option id="data_network_value_integrity_very_high" name="Very High" value="4"/>
+            </huiproperty>
+            <huiproperty id="data_network_value_comment_i" inputtype="text" name="Explanation integrity" tags="Risk"/>
+            <huiproperty defaultValue="0" id="data_network_value_method_availability" inputtype="booleanoption" name="Deduce availability with maximumpriciple" tags="Risk"/>
+            <huiproperty defaultValue="0" id="data_network_method_availability" inputtype="numericoption" max="2" min="0" name="Deduce availability (other)" tags="Risk">
+              <depends option="data_network_value_method_availability" value="0"/>
+              <option id="data_network_value_method_availability_none" name="unedited" value="0"/>
+              <option id="data_network_value_method_availability_dist" name="distribution effect" value="1"/>
+              <option id="data_network_value_method_availability_acc" name="accumulation effect" value="2"/>
+            </huiproperty>
+            <huiproperty id="data_network_value_availability" inputtype="numericoption" max="4" min="0" name="availability" tags="Risk">
+              <depends option="data_network_value_method_availability" value="0"/>
+              <option id="data_network_value_availability_unedited" name="Unedited" value="0"/>
+              <option id="data_network_value_availability_low" name="Insignificant" value="1"/>
+              <option id="data_network_value_availability_normal" name="Normal" value="2"/>
+              <option id="data_network_value_availability_high" name="High" value="3"/>
+              <option id="data_network_value_availability_very_high" name="Very High" value="4"/>
+            </huiproperty>
+            <huiproperty id="data_network_value_comment_a" inputtype="text" name="Explanation availability" tags="Risk"/>
+        </huipropertygroup>
+        <huipropertygroup id="data_network_group_protection_level_insignificant"
+            name="Protection Level Category: Insignificant">
+            <huiproperty id="data_network_pl_insignificant_laws" inputtype="text"
+                name="Laws / regulations / contracts">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_insignificant_laws_default">Violations of regulations and laws with no or only minimal consequences. No or only minimal breaches of contract which result in at most minor contractual penalties.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_insignificant_privacy" inputtype="text"
+                name="Privacy">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_insignificant_privacy_default">This deals with personal data whose processing could not adversely affect the social standing or financial wellbeing of those concerned.
+                        concerned.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_insignificant_injury" inputtype="text"
+                name="Injury">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_insignificant_injury_default">An impairment is not possible.</param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_insignificant_service" inputtype="text"
+                name="Service Delivery">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_insignificant_service_default">The impairment is tolerable. The maximum acceptable downtime is greater than 72 hours.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_insignificant_publicity" inputtype="text"
+                name="Publicity">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_insignificant_publicity_default">No or only minimal impairment of reputation / trustworthiness is to be expected.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_insignificant_financial" inputtype="text"
+                name="Financial Implications">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_insignificant_financial_default">There is no or only minimal financial loss to expect.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+        </huipropertygroup>
+        <huipropertygroup id="data_network_group_protection_level_normal" name="Protection Level Category: Normal">
+            <huiproperty id="data_network_pl_normal_laws" inputtype="text"
+                name="Laws / regulations / contracts">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_normal_laws_default">Violations of regulations and laws with minor consequences. Minor breaches of contract which result in at most minor contractual penalties.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_normal_privacy" inputtype="text" name="Privacy">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_normal_privacy_default">This deals with personal data whose processing could adversely affect the social standing or financial wellbeing of those concerned.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_normal_injury" inputtype="text" name="Injury">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_normal_injury_default">Does not appear possible.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_normal_service" inputtype="text"
+                name="Service Delivery">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_normal_service_default_default">Impairment was assessed to be tolerable by those concerned. The maximum acceptable down time is between 24 and 72 hours.
+                        hours.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_normal_publicity" inputtype="text" name="Publicity">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_normal_publicity_default">Only minimal impairment or only internal impairment of the reputation / trustworthiness of the organisation is expected.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_normal_financial" inputtype="text"
+                name="Financial Implications">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_normal_financial_default">The financial loss is acceptable to the organisation.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+        </huipropertygroup>
+        <huipropertygroup id="data_network_group_protection_level_high" name="Protection Level Category: High">
+            <huiproperty id="data_network_pl_high_laws" inputtype="text"
+                name="Laws / regulations / contracts">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_high_laws_default">Violations of regulations and laws with substantial consequences. Major breaches of contract with high contractual penalties.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_high_privacy" inputtype="text" name="Privacy">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_high_privacy_default">This aspect deals with personal data whose processing could have a seriously adverse affect on the social standing or financial wellbeing of those concerned.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_high_injury" inputtype="text" name="Injury">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_high_injury_default">Physical injury to an individual cannot be absolutely ruled out.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_high_service" inputtype="text" name="Service Delivery">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_high_service_default">Impairment of the ability to perform the tasks at hand was assessed as intolerable by some of the individuals concerned. The maximum acceptable down time is between one and 24 hours.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_high_publicity" inputtype="text" name="Publicity">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_high_publicity_default">Considerable impairment of the reputation / trustworthiness can be expected.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_high_financial" inputtype="text"
+                name="Financial Implications">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_high_financial_default">Fundamental violations of regulations and laws. Breaches of contract with ruinous damage liabilities.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+        </huipropertygroup>
+        <huipropertygroup id="data_network_group_protection_level_very_high" name="Protection Level Category: Very High">
+            <huiproperty id="data_network_pl_very_high_laws" inputtype="text"
+                name="Laws / regulations / contracts">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_very_high_laws_default">Fundamental violations of regulations and laws. Breaches of contract with ruinous damage liabilities.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_very_high_privacy" inputtype="text" name="Privacy">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_very_high_privacy_default">This aspect deals with personal data whose processing could result in the injury or death of the persons concerned or that could endanger the personal freedom of the persons concerned.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_very_high_injury" inputtype="text" name="Injury">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_very_high_injury_default">Serious injury to an individual is possible. There is a danger to life and limb.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_very_high_service" inputtype="text"
+                name="Service Delivery">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_very_high_service_default">Impairment of the ability to perform tasks was assessed as intolerable by all individuals concerned. The maximum acceptable down time is less than one hour.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_very_high_publicity" inputtype="text" name="Publicity">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_very_high_publicity_default">A nation-wide or state-wide loss of reputation / trustworthiness is conceivable, possibly even endangering the existence of the organisation.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+            <huiproperty id="data_network_pl_very_high_financial" inputtype="text"
+                name="Financial Implications">
+                <defaultRule class="SimpleValue">
+                    <param id="data_network_pl_very_high_financial_default">The financial loss threatens the existence of the organisation.
+                    </param>
+                </defaultRule>
+            </huiproperty>
+        </huipropertygroup>
+        <huipropertygroup id="data_network_vv_bsig" name="VV BSIG">
+            <huiproperty id="data_network_vv_bsig_authority" name="Authority" />
+            <huiproperty id="data_network_vv_bsig_availability_phone" name="Availability Phone" />
+            <huiproperty id="data_network_vv_bsig_availability_email" name="Availability E-Mail" />
+            <huiproperty id="data_network_vv_bsig_enquiry_phone" name="Enquiry Phone" />
+            <huiproperty id="data_network_vv_bsig_equiry_email" name="Enquiry E-Mail" />
+        </huipropertygroup>
+        <huipropertygroup id="data_network_data_protection_group" name="Data protection supervisory authority">
+            <huiproperty id="data_network_data_protection_authority" name="Competent supervisory authority" />
+            <huiproperty id="data_network_data_protection_adress" name="Address" />
+            <huiproperty id="data_network_data_protection_telephone" name="Phone" />
+            <huiproperty id="data_network_data_protection_email" name="Email" />
+        </huipropertygroup>
+    </huientity>
+    
+    <!-- End: Data network entity -->
+    
+    <!-- Start: Data entity -->
+
+    <huientity
+        name="Data"
+        id="data">
+
+        <huirelation to="raum" id="rel_data_raum"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="data" id="rel_data_data"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="server" id="rel_data_server"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="tkkomponente" id="rel_data_tkkomponente"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="netzkomponente" id="rel_data_netzkomponente"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="itverbund" id="rel_data_itverbund"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="client" id="rel_data_client"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="sonstit" id="rel_data_sonstit"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="gebaeude" id="rel_data_gebaeude"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="bstumsetzung" id="rel_data_bstumsetzung"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="gefaehrdungsumsetzung" id="rel_data_gefaehrdungsumsetzung"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="mnums" id="rel_data_mnums"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="anwendung" id="rel_data_anwendung"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huiproperty
+            name="Kürzel"
+            id="data_kuerzel"
+            focus="true">
+                <defaultRule class="SimpleValue">
+                    <param id="data_kuerzel_default">D-</param>
+                </defaultRule>
+        </huiproperty>
+        <huiproperty
+            name="Name"
+            id="data_name">
+        </huiproperty>
+        <huiproperty
+            name="Anzahl"
+            id="data_anzahl" />
+        <huiproperty
+            name="Erläuterung"
+            inputtype="text"
+            id="data_erlaeuterung"/>
+        <huiproperty
+            name="Data type"
+            id="data_type"
+            inputtype="singleoption">
+                <option
+                    id="data_type_none"
+                    name="" />
+                <option
+                    id="data_type_technical"/>
+                <option
+                    id="data_type_sensitive"/>
+                <option
+                    id="data_type_personal"/>
+        </huiproperty>        
+        <huiproperty
+            name="Personal Identifying Information"
+            id="data_ppi"
+            inputtype="singleoption">
+                <option
+                    id="data_ppi_true"/>
+                <option
+                    id="data_ppi_false"/>
+        </huiproperty>
+        <huiproperty
+            name="Consent to collect"
+            id="data_consent"
+            inputtype="singleoption">
+                <option
+                    id="data_consent_true"/>
+                <option
+                    id="data_consent_false"/>
+        </huiproperty>
+        <huiproperty
+            name="Type of Information"
+            id="data_information_type"
+            inputtype="singleoption">
+                <option
+                    id="data_information_type_volunteered"/>
+                <option
+                    id="data_information_type_observed"/>
+                                    <option
+                    id="data_information_type_inferred"/>
+        </huiproperty>     
+        <huipropertygroup
+            id="data_group_schutzbedarf"
+            name="Schutzbedarf">
+            <huiproperty
+                id="data_vertraulichkeit"
+                name="Vertraulichkeit"
+                inputtype="singleoption">
+                <depends option="data_vertraulichkeit_begruendung" value="Maximumprinzip" inverse="true" />
+                <option
+                    id="data_vertraulichkeit_normal"
+                    name="Normal" />
+                <option
+                    id="data_vertraulichkeit_hoch"
+                    name="Hoch" />
+                <option
+                    id="data_vertraulichkeit_sehrhoch"
+                    name="Sehr Hoch" />
+            </huiproperty>
+            <huiproperty
+                id="data_verfuegbarkeit"
+                name="Verfügbarkeit"
+                inputtype="singleoption">
+                <depends option="data_verfuegbarkeit_begruendung" value="Maximumprinzip" inverse="true" />
+                <option
+                    id="data_verfuegbarkeit_normal"
+                    name="Normal" />
+                <option
+                    id="data_verfuegbarkeit_hoch"
+                    name="Hoch" />
+                <option
+                    id="data_verfuegbarkeit_sehrhoch"
+                    name="Sehr Hoch" />
+            </huiproperty>
+            <huiproperty
+                id="data_integritaet"
+                name="Integrität"
+                inputtype="singleoption">
+                <depends option="data_integritaet_begruendung" value="Maximumprinzip" inverse="true" />
+                <option
+                    id="data_integritaet_normal"
+                    name="Normal" />
+                <option
+                    id="data_integritaet_hoch"
+                    name="Hoch" />
+                <option
+                    id="data_integritaet_sehrhoch"
+                    name="Sehr Hoch" />
+            </huiproperty>
+            <huiproperty
+                id="data_transparency"
+                name="Transparency"
+                inputtype="singleoption">
+                <depends option="data_transparency_begruendung" value="Maximumprinzip" inverse="true" />
+                <option
+                    id="data_transparency_normal"
+                    name="Normal" />
+                <option
+                    id="data_transparency_hoch"
+                    name="Hoch" />
+                <option
+                    id="data_transparency_sehrhoch"
+                    name="Sehr Hoch" />
+            </huiproperty>
+            <huiproperty
+                id="data_interveanibility"
+                name="Interveanibility"
+                inputtype="singleoption">
+                <depends option="data_interveanibility_begruendung" value="Maximumprinzip" inverse="true" />
+                <option
+                    id="data_interveanibility_normal"
+                    name="Normal" />
+                <option
+                    id="data_interveanibility_hoch"
+                    name="Hoch" />
+                <option
+                    id="data_interveanibility_sehrhoch"
+                    name="Sehr Hoch" />
+            </huiproperty>
+            <huiproperty
+                id="data_unlinkability"
+                name="Unlinkability"
+                inputtype="singleoption">
+                <depends option="data_unlinkability_begruendung" value="Maximumprinzip" inverse="true" />
+                <option
+                    id="data_unlinkability_normal"
+                    name="Normal" />
+                <option
+                    id="data_unlinkability_hoch"
+                    name="Hoch" />
+                <option
+                    id="data_unlinkability_sehrhoch"
+                    name="Sehr Hoch" />
+            </huiproperty>
+            <huiproperty
+                id="data_minimization"
+                name="Data Minimization"
+                inputtype="singleoption">
+                <depends option="data_minimization_begruendung" value="Maximumprinzip" inverse="true" />
+                <option
+                    id="data_minimization_normal"
+                    name="Normal" />
+                <option
+                    id="data_minimization_hoch"
+                    name="Hoch" />
+                <option
+                    id="data_minimization_sehrhoch"
+                    name="Sehr Hoch" />
+            </huiproperty> 
+            <huiproperty
+                name="Begründung Vertraulichkeit"
+                inputtype="text"
+                id="data_vertraulichkeit_begruendung" />
+            <huiproperty
+                name="Begründung Verfügbarkeit"
+                inputtype="text"
+                id="data_verfuegbarkeit_begruendung" />
+            <huiproperty
+                name="Begründung Integrität"
+                inputtype="text"
+                id="data_integritaet_begruendung" />
+            <huiproperty
+                name="Begründung Transparency"
+                inputtype="text"
+                id="data_transparency_begruendung" />
+            <huiproperty
+                name="Begründung Interveneability"
+                inputtype="text"
+                id="data_interveanibility_begruendung" />
+            <huiproperty
+                name="Begründung Unlinkability"
+                inputtype="text"
+                id="data_unlinkability_begruendung" />
+            <huiproperty
+                name="Begründung Data Minimization"
+                inputtype="text"
+                id="data_minimization_begruendung" />                                              
+        </huipropertygroup>
+    </huientity>
+    
+    <huientity
+        name="Data Process"
+        id="data_process">
+
+        <huirelation to="raum" id="rel_data_process_raum"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="data" id="rel_data_process_data"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="server" id="rel_data_process_server"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="tkkomponente" id="rel_data_process_tkkomponente"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="netzkomponente" id="rel_data_process_netzkomponente"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="itverbund" id="rel_data_process_itverbund"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="client" id="rel_data_process_client"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="sonstit" id="rel_data_process_sonstit"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="gebaeude" id="rel_data_process_gebaeude"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="bstumsetzung" id="rel_data_process_bstumsetzung"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="gefaehrdungsumsetzung" id="rel_data_process_gefaehrdungsumsetzung"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="mnums" id="rel_data_process_mnums"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="anwendung" id="rel_data_process_anwendung"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huiproperty
+            name="Kürzel"
+            id="data_process_kuerzel"
+            focus="true">
+                <defaultRule class="SimpleValue">
+                    <param id="data_process_kuerzel_default">P-</param>
+                </defaultRule>
+        </huiproperty>
+        <huiproperty
+            name="Name"
+            id="data_process_name">
+        </huiproperty>
+        <huiproperty
+            name="Anzahl"
+            id="data_process_anzahl" />
+        <huiproperty
+            name="Erläuterung"
+            inputtype="text"
+            id="data_process_erlaeuterung"/>
+        <huiproperty
+            name="Data type"
+            id="data_process_type"
+            inputtype="singleoption">
+                <option
+                    id="data_process_type_none"
+                    name="" />
+                <option
+                    id="data_process_type_technical"/>
+                <option
+                    id="data_process_type_sensitive"/>
+                <option
+                    id="data_process_type_personal"/>
+        </huiproperty>          
+        <huipropertygroup
+            id="data_process_group_schutzbedarf"
+            name="Schutzbedarf">
+            <huiproperty
+                id="data_process_vertraulichkeit"
+                name="Vertraulichkeit"
+                inputtype="singleoption">
+                <depends option="data_process_vertraulichkeit_begruendung" value="Maximumprinzip" inverse="true" />
+                <option
+                    id="data_process_vertraulichkeit_normal"
+                    name="Normal" />
+                <option
+                    id="data_process_vertraulichkeit_hoch"
+                    name="Hoch" />
+                <option
+                    id="data_process_vertraulichkeit_sehrhoch"
+                    name="Sehr Hoch" />
+            </huiproperty>
+            <huiproperty
+                id="data_process_verfuegbarkeit"
+                name="Verfügbarkeit"
+                inputtype="singleoption">
+                <depends option="data_process_verfuegbarkeit_begruendung" value="Maximumprinzip" inverse="true" />
+                <option
+                    id="data_process_verfuegbarkeit_normal"
+                    name="Normal" />
+                <option
+                    id="data_process_verfuegbarkeit_hoch"
+                    name="Hoch" />
+                <option
+                    id="data_process_verfuegbarkeit_sehrhoch"
+                    name="Sehr Hoch" />
+            </huiproperty>
+            <huiproperty
+                id="data_process_integritaet"
+                name="Integrität"
+                inputtype="singleoption">
+                <depends option="data_process_integritaet_begruendung" value="Maximumprinzip" inverse="true" />
+                <option
+                    id="data_process_integritaet_normal"
+                    name="Normal" />
+                <option
+                    id="data_process_integritaet_hoch"
+                    name="Hoch" />
+                <option
+                    id="data_process_integritaet_sehrhoch"
+                    name="Sehr Hoch" />
+            </huiproperty>
+            <huiproperty
+                id="data_process_transparency"
+                name="Transparency"
+                inputtype="singleoption">
+                <depends option="data_process_transparency_begruendung" value="Maximumprinzip" inverse="true" />
+                <option
+                    id="data_process_transparency_normal"
+                    name="Normal" />
+                <option
+                    id="data_process_transparency_hoch"
+                    name="Hoch" />
+                <option
+                    id="data_process_transparency_sehrhoch"
+                    name="Sehr Hoch" />
+            </huiproperty>
+            <huiproperty
+                id="data_process_interveanibility"
+                name="Interveanibility"
+                inputtype="singleoption">
+                <depends option="data_process_interveanibility_begruendung" value="Maximumprinzip" inverse="true" />
+                <option
+                    id="data_process_interveanibility_normal"
+                    name="Normal" />
+                <option
+                    id="data_process_interveanibility_hoch"
+                    name="Hoch" />
+                <option
+                    id="data_process_interveanibility_sehrhoch"
+                    name="Sehr Hoch" />
+            </huiproperty>
+            <huiproperty
+                id="data_process_unlinkability"
+                name="Unlinkability"
+                inputtype="singleoption">
+                <depends option="data_process_unlinkability_begruendung" value="Maximumprinzip" inverse="true" />
+                <option
+                    id="data_process_unlinkability_normal"
+                    name="Normal" />
+                <option
+                    id="data_process_unlinkability_hoch"
+                    name="Hoch" />
+                <option
+                    id="data_process_unlinkability_sehrhoch"
+                    name="Sehr Hoch" />
+            </huiproperty>
+            <huiproperty
+                id="data_process_minimization"
+                name="Data Minimization"
+                inputtype="singleoption">
+                <depends option="data_process_minimization_begruendung" value="Maximumprinzip" inverse="true" />
+                <option
+                    id="data_process_minimization_normal"
+                    name="Normal" />
+                <option
+                    id="data_process_minimization_hoch"
+                    name="Hoch" />
+                <option
+                    id="data_process_minimization_sehrhoch"
+                    name="Sehr Hoch" />
+            </huiproperty> 
+            <huiproperty
+                name="Begründung Vertraulichkeit"
+                inputtype="text"
+                id="data_process_vertraulichkeit_begruendung" />
+            <huiproperty
+                name="Begründung Verfügbarkeit"
+                inputtype="text"
+                id="data_process_verfuegbarkeit_begruendung" />
+            <huiproperty
+                name="Begründung Integrität"
+                inputtype="text"
+                id="data_process_integritaet_begruendung" />
+            <huiproperty
+                name="Begründung Transparency"
+                inputtype="text"
+                id="data_process_transparency_begruendung" />
+            <huiproperty
+                name="Begründung Interveneability"
+                inputtype="text"
+                id="data_process_interveanibility_begruendung" />
+            <huiproperty
+                name="Begründung Unlinkability"
+                inputtype="text"
+                id="data_process_unlinkability_begruendung" />
+            <huiproperty
+                name="Begründung Data Minimization"
+                inputtype="text"
+                id="data_process_minimization_begruendung" />                                              
+        </huipropertygroup>
+    </huientity>
+    
+    
 </huientities>

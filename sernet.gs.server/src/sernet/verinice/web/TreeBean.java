@@ -48,6 +48,7 @@ import sernet.verinice.model.catalog.CatalogModel;
 import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.ElementComparator;
 import sernet.verinice.model.common.ITitleAdaptor;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
 import sernet.verinice.model.iso27k.Asset;
 import sernet.verinice.model.iso27k.IISO27kGroup;
 import sernet.verinice.model.iso27k.IISO27kRoot;
@@ -347,7 +348,8 @@ public class TreeBean implements IElementListener {
         return element.getTypeId().equals(ISO27KModel.TYPE_ID)
                 || element.getTypeId().equals(BSIModel.TYPE_ID)
                 || element.getTypeId().equals(BpModel.TYPE_ID)
-                || element.getTypeId().equals(CatalogModel.TYPE_ID);
+                || element.getTypeId().equals(CatalogModel.TYPE_ID)
+                || element.getTypeId().equals(DataProtectionModel.TYPE_ID);
     }
     
     private boolean isTopLevel(CnATreeElement element) {

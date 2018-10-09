@@ -109,6 +109,7 @@ import sernet.verinice.model.bsi.NullModel;
 import sernet.verinice.model.bsi.risikoanalyse.FinishedRiskAnalysis;
 import sernet.verinice.model.catalog.CatalogModel;
 import sernet.verinice.model.common.CnATreeElement;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
 import sernet.verinice.model.ds.IDatenschutzElement;
 import sernet.verinice.model.iso27k.ISO27KModel;
 import sernet.verinice.rcp.IAttachedToPerspective;
@@ -343,6 +344,12 @@ public class BsiModelView extends RightsEnabledView
                 public void loaded(CatalogModel model) {
                     // do nothing
                 }
+
+				@Override
+				public void loaded(DataProtectionModel model) {
+					// do nothing
+					
+				}
             };
             CnAElementFactory.getInstance().addLoadListener(modelLoadListener);
         }

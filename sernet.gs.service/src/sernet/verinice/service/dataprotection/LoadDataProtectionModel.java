@@ -8,7 +8,7 @@ import sernet.verinice.interfaces.CommandException;
 import sernet.verinice.interfaces.GenericCommand;
 import sernet.verinice.interfaces.INoAccessControl;
 import sernet.verinice.model.dataprotection.DataProtectionModel;
-import sernet.verinice.service.bp.Logger;
+import org.apache.log4j.Logger;
 import sernet.verinice.service.commands.crud.CreateDataProtectionModel;
 
 public class LoadDataProtectionModel extends GenericCommand implements INoAccessControl {

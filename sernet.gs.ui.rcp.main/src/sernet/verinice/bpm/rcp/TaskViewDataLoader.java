@@ -48,6 +48,7 @@ import sernet.verinice.model.bsi.ITVerbund;
 import sernet.verinice.model.catalog.CatalogModel;
 import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.configuration.Configuration;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
 import sernet.verinice.model.iso27k.Audit;
 import sernet.verinice.model.iso27k.ISO27KModel;
 import sernet.verinice.model.iso27k.Organization;
@@ -123,6 +124,12 @@ public class TaskViewDataLoader {
                 public void loaded(CatalogModel model) {
                     // nothing to do
                 }
+
+				@Override
+				public void loaded(DataProtectionModel model) {
+					// do nothing
+					
+				}
             };
             CnAElementFactory.getInstance().addLoadListener(modelLoadListener);
         }

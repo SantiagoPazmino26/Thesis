@@ -38,6 +38,7 @@ import sernet.verinice.model.iso27k.ISO27KModel;
  * @see BSIModel
  * @see CatalogModel
  * @see BpModel
+ * @see DataProtectionModel
  *
  * @author Benjamin Weißenfels <bw[at]sernet[dot]de>
  *

@@ -37,6 +37,8 @@ import sernet.verinice.model.catalog.ICatalogModelListener;
 import sernet.verinice.model.common.ChangeLogEntry;
 import sernet.verinice.model.common.CnALink;
 import sernet.verinice.model.common.CnATreeElement;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
+import sernet.verinice.model.dataprotection.IDpModelListener;
 import sernet.verinice.model.iso27k.IISO27KModelListener;
 import sernet.verinice.model.iso27k.ISO27KModel;
 import sernet.verinice.model.validation.CnAValidation;
@@ -48,7 +50,7 @@ import sernet.verinice.service.tree.ElementManager;
  *
  * @author Daniel Murygin <dm[at]sernet[dot]de>
  */
-public class TreeUpdateListener implements IISO27KModelListener,IBSIModelListener, IBpModelListener, ICatalogModelListener {
+public class TreeUpdateListener implements IISO27KModelListener,IBSIModelListener, IBpModelListener, ICatalogModelListener, IDpModelListener {
 
     private static final String ERROR_MESSAGE = "Error while updating treeview";
 
@@ -375,6 +377,14 @@ public class TreeUpdateListener implements IISO27KModelListener,IBSIModelListene
         doModelReload(newModel);
     }
 
+    /* (non-Javadoc)
+     * @see sernet.verinice.model.dataprotection.IDpModelListener#modelReload(sernet.verinice.model.dataprotection.DataProtectionModel)
+     */
+    @Override
+    public void modelReload(DataProtectionModel newModel) {
+        doModelReload(newModel);
+    }
+    
     @Override
     public void modelReload(CatalogModel newModel) {
         doModelReload(newModel);

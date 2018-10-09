@@ -38,6 +38,7 @@ import sernet.verinice.model.bsi.ITVerbund;
 import sernet.verinice.model.common.ChangeLogEntry;
 import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.Permission;
+import sernet.verinice.model.dataprotection.DataNetwork;
 import sernet.verinice.model.iso27k.Audit;
 import sernet.verinice.model.iso27k.Organization;
 
@@ -157,7 +158,9 @@ public class CreateElement<T extends CnATreeElement> extends ChangeLoggingComman
             instance = (T) new Organization(container, createChildren);
         } else if (isItNetwork()) {
             instance = (T) new ItNetwork(container, createChildren);
-        } else if (isAudit()) {
+        } else if (isDataNetwork()) {
+            instance = (T) new DataNetwork(container, createChildren);
+        }else if (isAudit()) {
             instance = (T) new Audit(container, createChildren);
         } else {
             instance = clazz.getConstructor(CnATreeElement.class).newInstance(container);
@@ -192,6 +195,10 @@ public class CreateElement<T extends CnATreeElement> extends ChangeLoggingComman
 
     private boolean isItNetwork() {
         return ItNetwork.class.equals(clazz) || ItNetwork.TYPE_ID.equals(typeId);
+    }
+    
+    private boolean isDataNetwork() {
+        return DataNetwork.class.equals(clazz) || DataNetwork.TYPE_ID.equals(typeId);
     }
 
     private boolean isAudit() {

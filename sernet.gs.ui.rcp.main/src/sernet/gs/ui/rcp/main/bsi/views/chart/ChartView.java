@@ -51,6 +51,7 @@ import sernet.verinice.model.catalog.CatalogModel;
 import sernet.verinice.model.common.ChangeLogEntry;
 import sernet.verinice.model.common.CnALink;
 import sernet.verinice.model.common.CnATreeElement;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
 import sernet.verinice.model.iso27k.IISO27KModelListener;
 import sernet.verinice.model.iso27k.ISO27KModel;
 import sernet.verinice.model.validation.CnAValidation;
@@ -350,6 +351,12 @@ public class ChartView extends ViewPart {
             public void loaded(CatalogModel model) {
                 // nothing to do
             }
+
+			@Override
+			public void loaded(DataProtectionModel model) {
+				// do nothing
+				
+			}
 		};
 
 		changeListener = createChangeListener();

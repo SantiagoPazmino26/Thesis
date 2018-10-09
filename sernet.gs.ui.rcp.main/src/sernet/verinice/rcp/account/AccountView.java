@@ -87,6 +87,7 @@ import sernet.verinice.model.bsi.PersonenKategorie;
 import sernet.verinice.model.catalog.CatalogModel;
 import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.configuration.Configuration;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
 import sernet.verinice.model.iso27k.ISO27KModel;
 import sernet.verinice.model.iso27k.Organization;
 import sernet.verinice.model.iso27k.PersonGroup;
@@ -738,6 +739,12 @@ public class AccountView extends RightsEnabledView {
             public void loaded(CatalogModel model) {
                 // nothing to do
             }
+
+			@Override
+			public void loaded(DataProtectionModel model) {
+				// nothing to do
+				
+			}
         };
         CnAElementFactory.getInstance().addLoadListener(modelLoadListener);
     }

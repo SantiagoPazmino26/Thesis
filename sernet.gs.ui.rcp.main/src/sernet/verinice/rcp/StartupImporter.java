@@ -45,6 +45,7 @@ import sernet.verinice.iso27k.rcp.JobScheduler;
 import sernet.verinice.model.bp.elements.BpModel;
 import sernet.verinice.model.bsi.BSIModel;
 import sernet.verinice.model.catalog.CatalogModel;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
 import sernet.verinice.model.iso27k.ISO27KModel;
 import sernet.verinice.service.commands.SyncCommand;
 import sernet.verinice.service.commands.SyncParameter;
@@ -102,6 +103,12 @@ public abstract class StartupImporter {
                 public void loaded(CatalogModel model) {
                     // nothing to do
                 }
+
+				@Override
+				public void loaded(DataProtectionModel model) {
+					// do nothing
+					
+				}
             };
             CnAElementFactory.getInstance().addLoadListener(modelLoadListener);
         }

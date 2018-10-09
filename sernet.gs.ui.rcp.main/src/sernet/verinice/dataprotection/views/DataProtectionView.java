@@ -60,7 +60,8 @@ import sernet.verinice.iso27k.rcp.action.ExpandAction;
 import sernet.verinice.iso27k.rcp.action.HideEmptyFilter;
 import sernet.verinice.iso27k.rcp.action.MetaDropAdapter;
 import sernet.verinice.model.bp.IBpElement;
-import sernet.verinice.model.bp.IBpModelListener;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
+import sernet.verinice.model.dataprotection.IDpModelListener;
 import sernet.verinice.model.bp.elements.BpModel;
 import sernet.verinice.model.bsi.Attachment;
 import sernet.verinice.model.bsi.BSIModel;
@@ -80,7 +81,7 @@ import sernet.verinice.dataprotection.perspective.DataProtectionPerspective;
 import sernet.verinice.bp.rcp.BaseProtectionTreeSorter;
 import sernet.verinice.bp.rcp.BbModelingDropPerformer;
 import sernet.verinice.bp.rcp.GsCatalogModelingDropPerformer;
-import sernet.verinice.bp.rcp.Messages;
+import sernet.verinice.dataprotection.views.Messages;
 
 public class DataProtectionView extends RightsEnabledView 
 implements IAttachedToPerspective, ILinkedWithEditorView {
@@ -99,7 +100,7 @@ private ElementManager elementManager;
 private DrillDownAdapter drillDownAdapter;
 
 private IModelLoadListener modelLoadListener;
-private IBpModelListener modelUpdateListener;
+private IDpModelListener modelUpdateListener;
 private IPartListener2 linkWithEditorPartListener  = new LinkWithEditorPartListener(this);   
 
 private Action doubleClickAction;
@@ -133,13 +134,13 @@ public void createPartControl(final Composite parent) {
         startInitDataJob();
     } catch (Exception e) {
         LOG.error("Error while creating organization view", e); //$NON-NLS-1$
-        ExceptionUtil.log(e, Messages.BaseProtectionView_ErrorCreating);
+        ExceptionUtil.log(e, Messages.DataProtectionView_ErrorCreating);
     }
 }
 
 protected void initView(Composite parent) {
     IWorkbench workbench = getSite().getWorkbenchWindow().getWorkbench();
-    if (CnAElementFactory.isBpModelLoaded()) {
+    if (CnAElementFactory.isDataProtectionModelLoaded()) {
         CnAElementFactory.getInstance().reloadModelFromDatabase();
     }
 
@@ -167,13 +168,13 @@ protected void startInitDataJob() {
     if (LOG.isDebugEnabled()) {
         LOG.debug("MotITBPview: startInitDataJob"); //$NON-NLS-1$
     }
-    WorkspaceJob initDataJob = new WorkspaceJob(Messages.BaseProtectionView_Loading_1) {
+    WorkspaceJob initDataJob = new WorkspaceJob(Messages.DataProtectionView_Loading_1) {
         @Override
         public IStatus runInWorkspace(final IProgressMonitor monitor) {
             IStatus status = Status.OK_STATUS;
             try {
-                //monitor.beginTask(Messages.BaseProtectionView_Loading_2, IProgressMonitor.UNKNOWN);
-                //initData();
+                monitor.beginTask(Messages.DataProtectionView_Loading_2, IProgressMonitor.UNKNOWN);
+                initData();
             } catch (Exception e) {
                 LOG.error("Error while loading data.", e); //$NON-NLS-1$
                 status= new Status(Status.ERROR, "sernet.gs.ui.rcp.main", "Error while loading data",e); //$NON-NLS-1$ //$NON-NLS-2$
@@ -188,21 +189,21 @@ protected void startInitDataJob() {
 
 protected void initData() { 
     if (LOG.isDebugEnabled()) {
-        LOG.debug("BaseProtectionView: initData"); //$NON-NLS-1$
+        LOG.debug("DataProtectionView: initData"); //$NON-NLS-1$
     }
     synchronized (mutex) {
-        if(CnAElementFactory.isBpModelLoaded()) {
+        if(CnAElementFactory.isDataProtectionModelLoaded()) {
             if (modelUpdateListener == null ) {
                 // model listener should only be created once!
                 if (LOG.isDebugEnabled()){
-                    Logger.getLogger(this.getClass()).debug("Creating modelUpdateListener for BaseProtectionView."); //$NON-NLS-1$
+                    Logger.getLogger(this.getClass()).debug("Creating modelUpdateListener for DataProtectionView."); //$NON-NLS-1$
                 }
                 modelUpdateListener = new TreeUpdateListener(viewer,elementManager);
-                CnAElementFactory.getInstance().getBpModel().addModITBOModelListener(modelUpdateListener);
+                CnAElementFactory.getInstance().getDataProtectionModel().addModITBOModelListener(modelUpdateListener);
                 Display.getDefault().syncExec(new Runnable(){
                     @Override
                     public void run() {
-                        setInput(CnAElementFactory.getInstance().getBpModel());
+                        setInput(CnAElementFactory.getInstance().getDataProtectionModel());
                         viewer.refresh();
                     }
                 });
@@ -221,7 +222,10 @@ protected void initData() {
                 public void loaded(ISO27KModel model) { /* nothing to do*/  }
 
                 @Override
-                public void loaded(BpModel model) {
+                public void loaded(BpModel model) {/* nothing to do*/ }
+                
+                @Override
+                public void loaded(DataProtectionModel model) {
                     startInitDataJob();
                 }
 
@@ -233,7 +237,7 @@ protected void initData() {
     }
 }
 
-public void setInput(BpModel model) {
+public void setInput(DataProtectionModel model) {
     viewer.setInput(model);
 }
 
@@ -292,7 +296,7 @@ private void makeActions() {
     makeExpandAndCollapseActions();
  
     bulkEditAction = new ShowBulkEditAction(getViewSite().getWorkbenchWindow(), 
-            Messages.BaseProtectionView_BulkEdit);
+            Messages.DataProtectionView_BulkEdit);
           
     BSIModelViewDropListener bsiDropAdapter;
     metaDropAdapter = new MetaDropAdapter(viewer);
@@ -304,7 +308,7 @@ private void makeActions() {
     metaDropAdapter.addAdapter(bsiDropAdapter);
     metaDropAdapter.addAdapter(gsCatalogModelingDropPerformer);
     
-    linkWithEditorAction = new Action(Messages.BaseProtectionView_LinkWithEditor, IAction.AS_CHECK_BOX) {
+    linkWithEditorAction = new Action(Messages.DataProtectionView_LinkWithEditor, IAction.AS_CHECK_BOX) {
         @Override
         public void run() {
             toggleLinking(isChecked());
@@ -313,7 +317,7 @@ private void makeActions() {
     linkWithEditorAction.setChecked(isLinkingActive());
     linkWithEditorAction.setImageDescriptor(ImageCache.getInstance().getImageDescriptor(ImageCache.LINKED));
     naturalizeAction = new NaturalizeAction(getViewSite().getWorkbenchWindow());
-    accessControlEditAction = new ShowAccessControlEditAction(getViewSite().getWorkbenchWindow(), Messages.BaseProtectionView_AccessControl);
+    accessControlEditAction = new ShowAccessControlEditAction(getViewSite().getWorkbenchWindow(), Messages.DataProtectionView_AccessControl);
     
 
     makeFilterAction();
@@ -337,11 +341,11 @@ private void makeFilterAction() {
 
 protected void makeExpandAndCollapseActions() {
     expandAction = new ExpandAction(viewer, contentProvider);
-    expandAction.setText(Messages.BaseProtectionView_ExpandChildren);
+    expandAction.setText(Messages.DataProtectionView_ExpandChildren);
     expandAction.setImageDescriptor(ImageCache.getInstance().getImageDescriptor(ImageCache.EXPANDALL));
     
     collapseAction = new CollapseAction(viewer);
-    collapseAction.setText(Messages.BaseProtectionView_CollapseChildren);
+    collapseAction.setText(Messages.DataProtectionView_CollapseChildren);
     collapseAction.setImageDescriptor(ImageCache.getInstance().getImageDescriptor(ImageCache.COLLAPSEALL));
     
     expandAllAction = new Action() {
@@ -350,7 +354,7 @@ protected void makeExpandAndCollapseActions() {
             expandAll();
         }
     };
-    expandAllAction.setText(Messages.BaseProtectionView_ExpandAll);
+    expandAllAction.setText(Messages.DataProtectionView_ExpandAll);
     expandAllAction.setImageDescriptor(ImageCache.getInstance().getImageDescriptor(ImageCache.EXPANDALL));
 
     collapseAllAction = new Action() {
@@ -359,7 +363,7 @@ protected void makeExpandAndCollapseActions() {
             viewer.collapseAll();
         }
     };
-    collapseAllAction.setText(Messages.BaseProtectionView_CollapseAll);
+    collapseAllAction.setText(Messages.DataProtectionView_CollapseAll);
     collapseAllAction.setImageDescriptor(ImageCache.getInstance().getImageDescriptor(ImageCache.COLLAPSEALL));
 }
 
@@ -459,8 +463,8 @@ public String getPerspectiveId() {
 @Override
 public void dispose() {
     elementManager.clearCache();
-    if(CnAElementFactory.isBpModelLoaded()) {
-        CnAElementFactory.getInstance().getBpModel().removeBpModelListener(modelUpdateListener);
+    if(CnAElementFactory.isDataProtectionModelLoaded()) {
+        CnAElementFactory.getInstance().getDataProtectionModel().removeDataProtectionModelListener(modelUpdateListener);
     }
     CnAElementFactory.getInstance().removeLoadListener(modelLoadListener);
 //    getSite().getPage().removePartListener(linkWithEditorPartListener);

@@ -135,7 +135,14 @@ import sernet.verinice.model.iso27k.ThreatGroup;
 import sernet.verinice.model.iso27k.Vulnerability;
 import sernet.verinice.model.iso27k.VulnerabilityGroup;
 import sernet.verinice.model.samt.SamtTopic;
+import sernet.verinice.model.dataprotection.Data;
+import sernet.verinice.model.dataprotection.DataProcess;
 import sernet.verinice.service.commands.UpdateElementEntity;
+
+import sernet.verinice.model.dataprotection.DataKategorie;
+import sernet.verinice.model.dataprotection.DataNetwork;
+import sernet.verinice.model.dataprotection.DataProcessKategorie;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
 
 public interface IDAOFactory {
 
@@ -606,6 +613,18 @@ public interface IDAOFactory {
 	 * @return
 	 */
 	IBaseDao getDAO(String typeId);
+
+	void setDataKategorieDAO(IBaseDao<DataKategorie, Integer> daoToSet);
+	
+	void setDataProcessKategorieDAO(IBaseDao<DataProcessKategorie, Integer> daoToSet);
+
+	void setDataProcessDAO(IBaseDao<DataProcess, Integer> daoToSet);
+
+	void setDataDAO(IBaseDao<Data, Integer> daoToSet);
+	
+    void setDataNetworkDAO(IBaseDao<DataNetwork, Integer> daoToSet);
+    
+    void setDataProtectionModelDAO(IBaseDao<DataProtectionModel, Integer> daoToSet);
 
 
 

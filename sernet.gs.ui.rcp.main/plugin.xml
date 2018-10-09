@@ -2135,14 +2135,56 @@
          <action
                class="sernet.verinice.dataprotection.actions.ImportCatalogAction"
                icon="icons/import.gif"
-               id="sernet.verinice.dataprotection.actions.ImportCatalogAction"
+               id="sernet.verinice.dataprotection.action.ImportCatalogAction"
                label="%action.label.import_catalog"
                state="true"
                style="push"
                toolbarPath="additions"
                tooltip="%action.tooltip.import_catalog">
          </action>
-      </viewContribution>            
+      </viewContribution>
+      <viewContribution
+      		id="sernet.verinice.dataprotection.action.AddDataNetworkActionDelegate"
+      		targetID="sernet.verinice.dataprotection.views.DataProtectionView">
+             <action
+               class="sernet.verinice.dataprotection.actions.AddDataNetworkActionDelegate"
+               icon="icons/note-new.png"
+               id="sernet.verinice.dataprotection.action.AddDataNetworkActionDelegate"
+               label="%action.label.addItNetwork"
+               state="true"
+               style="push"
+               toolbarPath="additions"
+               tooltip="%action.tooltip.addItNetwork">
+         </action>
+      </viewContribution>
+      <viewContribution
+            id="sernet.verinice.dataprotection.action.importItNetwork"
+            targetID="sernet.verinice.dataprotection.views.DataProtectionView">
+         <action
+               class="sernet.gs.ui.rcp.main.actions.ImportXMLAction"
+               icon="icons/import.gif"
+               id="sernet.gs.ui.rcp.main.actions.ImportXMLAction"
+               label="%action.label.import_it_network"
+               state="true"
+               style="push"
+               toolbarPath="additions"
+               tooltip="%action.tooltip.import_it_network">
+         </action>
+      </viewContribution>
+      <viewContribution
+            id="sernet.verinice.dataprotection.action.exportItNetwork"
+            targetID="sernet.verinice.dataprotection.views.DataProtectionView">
+         <action
+               class="sernet.verinice.iso27k.rcp.action.ExportAction"
+               icon="icons/export.gif"
+               id="sernet.verinice.iso27k.rcp.action.ExportAction"
+               label="%action.label.export_it_network"
+               state="true"
+               style="push"
+               toolbarPath="additions"
+               tooltip="%action.tooltip.export_it_network">
+         </action>
+      </viewContribution>                        
    </extension>
    <extension point="org.eclipse.ui.handlers">
       <handler class="sernet.verinice.iso27k.rcp.action.CopyHandler"

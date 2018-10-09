@@ -83,6 +83,11 @@ import sernet.verinice.model.bsi.risikoanalyse.IGefaehrdungsBaumElement;
 import sernet.verinice.model.catalog.CatalogModel;
 import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.Domain;
+import sernet.verinice.model.dataprotection.Data;
+import sernet.verinice.model.dataprotection.DataKategorie;
+import sernet.verinice.model.dataprotection.DataNetwork;
+import sernet.verinice.model.dataprotection.DataProcess;
+import sernet.verinice.model.dataprotection.DataProcessKategorie;
 import sernet.verinice.model.ds.Datenverarbeitung;
 import sernet.verinice.model.ds.IDatenschutzElement;
 import sernet.verinice.model.ds.Personengruppen;
@@ -258,6 +263,13 @@ public final class CnATypeMapper {
         descriptionPropertyMap.put(Raum.TYPE_ID, Raum.PROP_ERLAEUTERUNG);
         descriptionPropertyMap.put(BausteinUmsetzung.TYPE_ID, BausteinUmsetzung.P_ERLAEUTERUNG);
         descriptionPropertyMap.put(MassnahmenUmsetzung.TYPE_ID, MassnahmenUmsetzung.P_ERLAEUTERUNG);
+        
+        //Data protection types
+        typeIdClass.put(DataProcess.TYPE_ID, DataProcess.class);
+        typeIdClass.put(Data.TYPE_ID, Data.class);
+        typeIdClass.put(DataKategorie.TYPE_ID, DataKategorie.class);
+        typeIdClass.put(DataProcessKategorie.TYPE_ID, DataProcessKategorie.class);
+        typeIdClass.put(DataNetwork.TYPE_ID, DataNetwork.class);
 
     }
 
@@ -266,7 +278,7 @@ public final class CnATypeMapper {
     private static final String[] STRUKTUR_ELEMENT_TYPES = new String[] { Anwendung.TYPE_ID,
             BSIModel.TYPE_ID, Client.TYPE_ID, Gebaeude.TYPE_ID, ITVerbund.TYPE_ID,
             NetzKomponente.TYPE_ID, Person.TYPE_ID, Raum.TYPE_ID, Server.TYPE_ID, SonstIT.TYPE_ID,
-            TelefonKomponente.TYPE_ID };
+            TelefonKomponente.TYPE_ID, DataNetwork.TYPE_ID, DataProcess.TYPE_ID, Data.TYPE_ID };
 
     private static final String[] IISO27K_ELEMENT_TYPES = new String[] { ResponseGroup.TYPE_ID,
             ExceptionGroup.TYPE_ID, VulnerabilityGroup.TYPE_ID, PersonGroup.TYPE_ID,

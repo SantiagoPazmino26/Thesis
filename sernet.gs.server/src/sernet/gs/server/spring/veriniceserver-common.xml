@@ -275,6 +275,14 @@ This variant:
     <property name="bpDocumentGroupDAO" ref="bpDocumentGroupDAO" />
     <property name="bpIncidentGroupDAO" ref="bpIncidentGroupDAO" />
     <property name="bpRecordGroupDAO" ref="bpRecordGroupDAO" />
+    
+    		<!-- Data Protection DAOs -->
+		<property name="dataProtectionModelDAO" ref="dataProtectionModelDAO" />
+    	<property name="dataNetworkDAO" ref="dataNetworkDAO" />
+    	<property name="dataKategorieDAO" ref="dataKategorieDAO" />
+    	<property name="dataProcessKategorieDAO" ref="dataProcessKategorieDAO" />
+    	<property name="dataProcessDAO" ref="dataProcessDAO" />
+    	<property name="dataDAO" ref="dataDAO" />
 
         <!-- Miscellaneous DAOs -->
         <property name="importIsoDAO" ref="importIsoDAO" /> 

@@ -849,6 +849,51 @@
             <value>sernet.verinice.model.catalog.CatalogModel</value>
         </constructor-arg>
     </bean>
+    
+    <!-- Start data protection dao definitions ============================================================================ -->
+    
+    <bean id="dataProtectionModelDAO" class="sernet.verinice.hibernate.TreeElementDao">
+		<constructor-arg>
+			<value>sernet.verinice.model.dataprotection.DataProtectionModel</value>
+		</constructor-arg>
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="dataNetworkDAO" class="sernet.verinice.hibernate.TreeElementDao">
+		<constructor-arg>
+			<value>sernet.verinice.model.dataprotection.DataNetwork</value>
+		</constructor-arg>
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="dataKategorieDAO" class="sernet.verinice.hibernate.TreeElementDao">
+		<constructor-arg>
+			<value>sernet.verinice.model.dataprotection.DataKategorie</value>
+		</constructor-arg>
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="dataProcessKategorieDAO" class="sernet.verinice.hibernate.TreeElementDao">
+		<constructor-arg>
+			<value>sernet.verinice.model.dataprotection.DataProcessKategorie</value>
+		</constructor-arg>
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="dataProcessDAO" class="sernet.verinice.hibernate.TreeElementDao">
+		<constructor-arg>
+			<value>sernet.verinice.model.dataprotection.DataProcess</value>
+		</constructor-arg>
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="dataDAO" class="sernet.verinice.hibernate.TreeElementDao">
+		<constructor-arg>
+			<value>sernet.verinice.model.dataprotection.Data</value>
+		</constructor-arg>
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
 
 
 	<!-- END dao definitions ============================================================================ -->

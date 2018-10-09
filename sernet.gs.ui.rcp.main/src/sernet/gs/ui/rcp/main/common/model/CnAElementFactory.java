@@ -68,6 +68,7 @@ import sernet.verinice.model.bp.groups.RoomGroup;
 import sernet.verinice.model.bp.groups.SafeguardGroup;
 import sernet.verinice.model.dataprotection.DataProcessKategorie;
 import sernet.verinice.model.dataprotection.DataKategorie;
+import sernet.verinice.model.dataprotection.DataNetwork;
 import sernet.verinice.model.dataprotection.Data;
 import sernet.verinice.model.dataprotection.DataProcess;
 import sernet.verinice.model.dataprotection.DataProtectionModel;
@@ -145,6 +146,7 @@ import sernet.verinice.model.samt.SamtTopic;
 import sernet.verinice.service.bp.LoadBpModel;
 import sernet.verinice.service.commands.CnATypeMapper;
 import sernet.verinice.service.commands.CreateAnwendung;
+import sernet.verinice.service.commands.CreateDataNetwork;
 import sernet.verinice.service.commands.CreateElement;
 import sernet.verinice.service.commands.CreateITNetwork;
 import sernet.verinice.service.commands.CreateITVerbund;
@@ -535,6 +537,25 @@ public final class CnAElementFactory {
         elementbuilders.put(BpRecordGroup.TYPE_ID, new DefaultElementBuilder(BpRecordGroup.TYPE_ID));
         
         //Data protection builders
+        
+        elementbuilders.put(DataNetwork.TYPE_ID, new ElementBuilder() {
+            @Override
+            public CnATreeElement build(CnATreeElement container, BuildInput input)
+                    throws CommandException {
+                log.debug("Creating new DataNetwork in " + container); //$NON-NLS-1$
+                boolean createChildren = true;
+                if (input != null) {
+                    createChildren = (Boolean) input.getInput();
+                }
+                CreateDataNetwork saveCommand = new CreateDataNetwork(container, createChildren);
+                saveCommand = ServiceFactory.lookupCommandService().executeCommand(saveCommand);
+                DataNetwork datanetwork = saveCommand.getNewElement();
+
+                datanetwork.setParent(dataProtectionModel);
+                return datanetwork;
+            }
+        });
+        
         elementbuilders.put(DataProcessKategorie.TYPE_ID,
                 new DefaultElementBuilder(DataProcessKategorie.TYPE_ID));
         elementbuilders.put(Data.TYPE_ID,
@@ -775,7 +796,7 @@ public final class CnAElementFactory {
         } else if (element instanceof BpModel || element instanceof IBpElement) {
             model = CnAElementFactory.getInstance().getBpModel();
         } else if (element instanceof DataProtectionModel) {
-            model = CnAElementFactory.getInstance().getBpModel();
+            model = CnAElementFactory.getInstance().getDataProtectionModel();
         }  else {
             model = CnAElementFactory.getLoadedModel();
         }
@@ -818,13 +839,13 @@ public final class CnAElementFactory {
         }
         synchronized (mutex) {
             if (dataProtectionModel == null) {
-            	dataProtectionModel = loadBpModel();
+            	dataProtectionModel = loadDataProtectionModel();
                 if (dataProtectionModel == null) {
-                    createBpModel();
+                    createDataProtectionModel();
                 }
             }
         }
-        return boModel;
+        return dataProtectionModel;
     }
 
     public CatalogModel getCatalogModel() {
