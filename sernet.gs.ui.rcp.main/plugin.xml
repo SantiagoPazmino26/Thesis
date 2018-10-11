@@ -1346,6 +1346,34 @@
                style="push"
                tooltip="%action.tooltip.addBpRecord"/>
       </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="sernet.verinice.dataprotection.dataContrib"
+            objectClass="sernet.verinice.model.dataprotection.DataKategorie">
+         <action
+               class="sernet.verinice.dataprotection.actions.AddDataActionDelegate"
+               enablesFor="+"
+               icon="icons/phone.png"
+               id="sernet.verinice.dataprotection.addData"
+               label="%action.label.41"
+               menubarPath="content"
+               style="push"
+               tooltip="%action.tooltip.41"/>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="sernet.verinice.dataprotection.dataProcessContrib"
+            objectClass="sernet.verinice.model.dataprotection.DataProcessKategorie">
+         <action
+               class="sernet.verinice.dataprotection.actions.AddDataProcessActionDelegate"
+               enablesFor="+"
+               icon="icons/phone.png"
+               id="sernet.verinice.dataprotection.addDataProcess"
+               label="%action.label.42"
+               menubarPath="content"
+               style="push"
+               tooltip="%action.tooltip.42"/>
+      </objectContribution>        
    </extension>                               
    <extension point="org.eclipse.ui.menus">
       <menuContribution locationURI="popup:sernet.verinice.iso27k.rcp.ISMView?after=content">	  

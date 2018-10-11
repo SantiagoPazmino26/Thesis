@@ -79,6 +79,9 @@ import sernet.verinice.model.bsi.TelefonKomponente;
 import sernet.verinice.model.bsi.risikoanalyse.GefaehrdungsUmsetzung;
 import sernet.verinice.model.bsi.risikoanalyse.RisikoMassnahmenUmsetzung;
 import sernet.verinice.model.common.CnATreeElement;
+import sernet.verinice.model.dataprotection.Data;
+import sernet.verinice.model.dataprotection.DataNetwork;
+import sernet.verinice.model.dataprotection.DataProcess;
 import sernet.verinice.model.ds.Datenverarbeitung;
 import sernet.verinice.model.ds.Personengruppen;
 import sernet.verinice.model.ds.StellungnahmeDSB;
@@ -373,6 +376,10 @@ public final class EditorFactory {
         typedFactories.put(BpRecord.class, bsiEditorFactory);
         typedFactories.put(BpRecordGroup.class, bsiEditorFactory);
 
+        //Data protection elements
+        typedFactories.put(DataNetwork.class, bsiEditorFactory);
+        typedFactories.put(Data.class, bsiEditorFactory);
+        typedFactories.put(DataProcess.class, bsiEditorFactory);
         
         // Self Assessment (SAMT) elements
         typedFactories.put(SamtTopic.class, bsiEditorFactory);

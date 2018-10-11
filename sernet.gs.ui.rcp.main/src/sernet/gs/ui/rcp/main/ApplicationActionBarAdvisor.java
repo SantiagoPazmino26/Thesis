@@ -79,6 +79,7 @@ import sernet.gs.ui.rcp.main.preferences.ShowPreferencesAction;
 import sernet.verinice.bp.rcp.BaseProtectionView;
 import sernet.verinice.bpm.rcp.OpenTaskViewAction;
 import sernet.verinice.dataprotection.perspective.DataProtectionPerspective;
+import sernet.verinice.dataprotection.views.DataProtectionView;
 import sernet.verinice.interfaces.ActionRightIDs;
 import sernet.verinice.iso27k.rcp.CatalogView;
 import sernet.verinice.iso27k.rcp.ISMView;
@@ -201,6 +202,8 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     private TestAction testAction;
 
     private OpenViewAction openCatalogViewAction;
+    
+    private OpenViewAction openDataProtectionViewAction;
 
     public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
         super(configurer);
@@ -288,6 +291,8 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         
         this.openCatalogViewAction = new OpenViewAction(window, Messages.ApplicationActionBarAdvisor_CatalogView, 
                 sernet.verinice.rcp.catalog.CatalogView.ID, ImageCache.VIEW_CATALOG, ActionRightIDs.CATALOGVIEW);
+        
+        this.openDataProtectionViewAction = new OpenViewAction(window, Messages.ApplicationActionBarAdvisor_46, DataProtectionView.ID, ImageCache.VIEW_MASSNAHMEN, ActionRightIDs.DATA_PROTECTION_VIEW);
 
         IAction actions[] = new IAction[]{this.exitAction, this.copyAction, this.pasteAction,
                 this.aboutAction, this.newWindowAction, this.saveAction, this.saveAsAction,
@@ -305,7 +310,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
                 this.introAction, this.openGroupViewAction, this.openReportdepositViewAction,
                 this.openSearchViewAction, this.openGSToolMappingViewAction, this.openBpViewAction,
                 this.openCatalogViewAction,
-                this.testAction
+                this.testAction,this.openDataProtectionViewAction
          };
         registerActions(actions);
 
@@ -438,6 +443,10 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         viewsMenu.add(this.openDSViewAction);
         viewsMenu.add(new Separator());
         
+        //Data Protection
+        viewsMenu.add(this.openDataProtectionViewAction);
+        viewsMenu.add(new Separator());
+        
         // global
         viewsMenu.add(this.openDocumentViewAction);
         viewsMenu.add(this.openBSIBrowserAction);
@@ -516,6 +525,11 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         myToolbar.add(this.openTaskViewAction);
 
         myToolbar.add(new Separator());
+        
+        //Data Protection
+        myToolbar.add(this.openDataProtectionViewAction);
+        myToolbar.add(new Separator());        
+        
         // common items
         myToolbar.add(this.openAccountViewAction);
         myToolbar.add(this.openGroupViewAction);

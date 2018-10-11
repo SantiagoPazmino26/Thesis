@@ -113,7 +113,10 @@ public final class ActionRightIDs {
     public static final String XMLEXPORT = "xmlexport";
     public static final String XMLIMPORT = "xmlimport";
     public static final String MIGRATE_DATA_PROTECTION = "migrate_data_protection";
-
+    
+    //data protection
+    public static final String DATA_PROTECTION_VIEW = "data_protection_view";
+    
     private static Logger log = Logger.getLogger(ActionRightIDs.class);
 
     private ActionRightIDs() {

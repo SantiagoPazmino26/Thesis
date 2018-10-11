@@ -476,7 +476,7 @@ public void dispose() {
  */
 @Override
 public String getRightID() {
-    return ActionRightIDs.BASEPROTECTIONVIEW;
+    return ActionRightIDs.DATA_PROTECTION_VIEW;
 }
 
 /* (non-Javadoc)

@@ -103,6 +103,7 @@
 	        <action id="cnavalidation" />
 	        <action id="showallfiles" />
 	        <action id="migrate_data_protection" />
+            <action id="data_protection_view" />	        
         </profile>
     </profiles>
     <userprofiles>
