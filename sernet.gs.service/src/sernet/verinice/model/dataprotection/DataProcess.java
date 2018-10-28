@@ -28,6 +28,8 @@ implements IBSIStrukturElement {
         return log;
     }
 	
+    private static final long serialVersionUID = 1L;
+    
 	public static final String PROP_TAG			= "data_process_tag"; //$NON-NLS-1$
 	public static final String PROP_NAME = "data_process_name"; //$NON-NLS-1$
 	public static final String PROP_KUERZEL = "data_process_kuerzel"; //$NON-NLS-1$

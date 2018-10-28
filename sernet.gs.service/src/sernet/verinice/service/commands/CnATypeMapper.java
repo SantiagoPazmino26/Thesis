@@ -251,6 +251,13 @@ public final class CnATypeMapper {
         typeIdClass.put(BpDocument.TYPE_ID, BpDocument.class);
         typeIdClass.put(BpIncident.TYPE_ID, BpIncident.class);
         typeIdClass.put(BpRecord.TYPE_ID, BpRecord.class);
+        
+        //Data protection types
+        typeIdClass.put(DataProcess.TYPE_ID, DataProcess.class);
+        typeIdClass.put(Data.TYPE_ID, Data.class);
+        typeIdClass.put(DataKategorie.TYPE_ID, DataKategorie.class);
+        typeIdClass.put(DataProcessKategorie.TYPE_ID, DataProcessKategorie.class);
+        typeIdClass.put(DataNetwork.TYPE_ID, DataNetwork.class);
 
         // map for description properties:
         descriptionPropertyMap.put(Client.TYPE_ID, Client.PROP_ERLAEUTERUNG);
@@ -262,14 +269,7 @@ public final class CnATypeMapper {
         descriptionPropertyMap.put(NetzKomponente.TYPE_ID, NetzKomponente.PROP_ERLAEUTERUNG);
         descriptionPropertyMap.put(Raum.TYPE_ID, Raum.PROP_ERLAEUTERUNG);
         descriptionPropertyMap.put(BausteinUmsetzung.TYPE_ID, BausteinUmsetzung.P_ERLAEUTERUNG);
-        descriptionPropertyMap.put(MassnahmenUmsetzung.TYPE_ID, MassnahmenUmsetzung.P_ERLAEUTERUNG);
-        
-        //Data protection types
-        typeIdClass.put(DataProcess.TYPE_ID, DataProcess.class);
-        typeIdClass.put(Data.TYPE_ID, Data.class);
-        typeIdClass.put(DataKategorie.TYPE_ID, DataKategorie.class);
-        typeIdClass.put(DataProcessKategorie.TYPE_ID, DataProcessKategorie.class);
-        typeIdClass.put(DataNetwork.TYPE_ID, DataNetwork.class);
+        descriptionPropertyMap.put(MassnahmenUmsetzung.TYPE_ID, MassnahmenUmsetzung.P_ERLAEUTERUNG);        
 
     }
 

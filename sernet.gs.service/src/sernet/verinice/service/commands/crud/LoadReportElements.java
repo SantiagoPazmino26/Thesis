@@ -42,6 +42,11 @@ import sernet.verinice.model.bsi.TelefonKomponente;
 import sernet.verinice.model.bsi.risikoanalyse.FinishedRiskAnalysis;
 import sernet.verinice.model.bsi.risikoanalyse.GefaehrdungsUmsetzung;
 import sernet.verinice.model.common.CnATreeElement;
+import sernet.verinice.model.dataprotection.Data;
+import sernet.verinice.model.dataprotection.DataKategorie;
+import sernet.verinice.model.dataprotection.DataNetwork;
+import sernet.verinice.model.dataprotection.DataProcess;
+import sernet.verinice.model.dataprotection.DataProcessKategorie;
 import sernet.verinice.model.ds.Datenverarbeitung;
 import sernet.verinice.model.ds.Personengruppen;
 import sernet.verinice.model.ds.StellungnahmeDSB;
@@ -169,7 +174,7 @@ public class LoadReportElements extends GenericCommand implements ICachedCommand
 
 	
 	private boolean hasScopeID(CnATreeElement root){
-	    return (root instanceof ITVerbund) || (root instanceof Organization);
+	    return (root instanceof ITVerbund) || (root instanceof Organization) || (root instanceof DataNetwork);
 	}
   
 
@@ -277,6 +282,10 @@ public class LoadReportElements extends GenericCommand implements ICachedCommand
                 return ((SonstIT)element).canContain(potentialChild);
             } else if(element instanceof TelefonKomponente){
                 return ((TelefonKomponente)element).canContain(potentialChild);
+            } else if(element instanceof Data) {
+            	return ((Data)element).canContain(potentialChild);
+            }else if(element instanceof DataProcess) {
+            	return ((DataProcess)element).canContain(potentialChild);
             }
         }
         return false;
@@ -293,7 +302,9 @@ public class LoadReportElements extends GenericCommand implements ICachedCommand
                                           Raum.class,
                                           Server.class,
                                           SonstIT.class,
-                                          TelefonKomponente.class
+                                          TelefonKomponente.class,
+                                          Data.class,
+                                          DataProcess.class
                                           };
         
         CnATreeElement potentialChild = getPotentialChild(typeId, gsClasses);
@@ -319,7 +330,11 @@ public class LoadReportElements extends GenericCommand implements ICachedCommand
                 return ((SonstigeITKategorie)kategorie).canContain(potentialChild);
             } else if(kategorie instanceof TKKategorie){
                 return ((TKKategorie)kategorie).canContain(potentialChild);
-            }
+            } else if(kategorie instanceof DataKategorie){
+                return ((DataKategorie)kategorie).canContain(potentialChild);
+            } else if(kategorie instanceof DataProcessKategorie){
+                return ((DataProcessKategorie)kategorie).canContain(potentialChild);
+            } 
         } 
         return false;
     }

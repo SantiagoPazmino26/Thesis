@@ -1060,6 +1060,7 @@ public final class CnAElementFactory {
             reloadIsoModelFromDatabasePrivate();
             reloadBpModelFromDatabasePrivate();
             reloadCatalogModelFromDatabasePrivate();
+            reloadDataProtectionModelFromDatabasePrivate();
         } catch (Exception e) {
             log.error(Messages.getString("CnAElementFactory.5"), e); //$NON-NLS-1$
         }
@@ -1148,6 +1149,29 @@ public final class CnAElementFactory {
             catalogModel.moveListener(newModel);
             catalogModel = newModel;
             fireLoad(catalogModel);
+        }
+    }
+    
+    public void reloadDataProtectionModelFromDatabase() {
+        fireClosed();
+        try {
+            reloadDataProtectionModelFromDatabasePrivate();
+        } catch (Exception e) {
+            log.error("Could not reload data protection model from database", e); //$NON-NLS-1$
+        }
+    }
+
+    private void reloadDataProtectionModelFromDatabasePrivate() {
+        if (isDataProtectionModelLoaded()) {
+            DataProtectionModel newModel = loadDataProtectionModel();
+            if (log.isDebugEnabled()) {
+                log.debug(
+                        "reloadDataProtectionModelFromDatabasePrivate, data protection model loaded"); //$NON-NLS-1$
+            }
+            dataProtectionModel.modelReload(newModel);
+            dataProtectionModel.moveListener(newModel);
+            dataProtectionModel = newModel;
+            fireLoad(dataProtectionModel);
         }
     }
 

@@ -57,6 +57,8 @@ import sernet.verinice.model.bsi.SonstigeITKategorie;
 import sernet.verinice.model.bsi.TKKategorie;
 import sernet.verinice.model.bsi.risikoanalyse.FinishedRiskAnalysis;
 import sernet.verinice.model.common.CnATreeElement;
+import sernet.verinice.model.dataprotection.DataKategorie;
+import sernet.verinice.model.dataprotection.DataProcessKategorie;
 import sernet.verinice.model.iso27k.Audit;
 import sernet.verinice.model.iso27k.Organization;
 import sernet.verinice.service.commands.CnATypeMapper;
@@ -82,6 +84,7 @@ public class HUIObjectModelService implements IObjectModelService {
     private Set<String> allTypeIds = null;
     private Set<String> allBSICategories = null;
     private Set<String> allStaticProperties = null;
+    private Set<String> allDpCategories = null;
     private Set<String> allBpCategories = null;
 
     private Map<String, Set<String>> possibleChildren = null;
@@ -151,6 +154,7 @@ public class HUIObjectModelService implements IObjectModelService {
         removeNonCnaTreeElementTypeIDs();
         addAllBSIElements();
         addBpCategories();
+        addDpCategories();
         addAllStaticProperties();
     }
 
@@ -197,6 +201,13 @@ public class HUIObjectModelService implements IObjectModelService {
         allBpCategories.add(BpRecordGroup.TYPE_ID);
         
         allTypeIds.addAll(allBpCategories);
+    }
+    
+    private void addDpCategories() {
+    	allDpCategories = new HashSet<String>();
+    	allDpCategories.add(DataKategorie.TYPE_ID);
+    	allDpCategories.add(DataProcessKategorie.TYPE_ID);
+        allTypeIds.addAll(allDpCategories);
     }
     
     
@@ -277,6 +288,10 @@ public class HUIObjectModelService implements IObjectModelService {
         return allBpCategories.contains(typeId);
     }
 
+    private boolean isDpCategory(String typeId) {
+        return allDpCategories.contains(typeId);
+    }
+    
     public Set<String> getAllTypeIDs() {
         if (allTypeIds == null) {
             fillAllTypeIds();
@@ -533,7 +548,7 @@ public class HUIObjectModelService implements IObjectModelService {
             allRelationLabels = new HashMap<>();
             Set<HuiRelation> allRelationIDs = new HashSet<>();
             for(String typeId : getAllTypeIDs()){
-                if (!isBSICategory(typeId) && !isBpCategory(typeId)) {
+                if (!isBSICategory(typeId) && !isBpCategory(typeId) && !isDpCategory(typeId)) {
                     allRelationIDs.addAll(huiTypeFactory.getPossibleRelationsFrom(typeId));
                 }
                 

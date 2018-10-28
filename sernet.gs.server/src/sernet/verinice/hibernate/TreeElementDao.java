@@ -35,6 +35,7 @@ import sernet.verinice.model.bsi.ITVerbund;
 import sernet.verinice.model.common.CascadingTransaction;
 import sernet.verinice.model.common.CnALink;
 import sernet.verinice.model.common.CnATreeElement;
+import sernet.verinice.model.dataprotection.DataNetwork;
 import sernet.verinice.model.iso27k.InheritLogger;
 import sernet.verinice.model.iso27k.Organization;
 import sernet.verinice.search.IElementSearchDao;
@@ -294,7 +295,7 @@ public class TreeElementDao<T, ID extends Serializable> extends HibernateDao<T, 
     }
     
     private boolean isScope(CnATreeElement element) {
-        return element instanceof ITVerbund || element instanceof Organization;
+        return element instanceof ITVerbund || element instanceof Organization || element instanceof DataNetwork;
     }
 
     protected void indexDelete(CnATreeElement element) {

@@ -16,6 +16,7 @@ import sernet.verinice.interfaces.CommandException;
 import sernet.verinice.model.bp.elements.ItNetwork;
 import sernet.verinice.model.bsi.ITVerbund;
 import sernet.verinice.model.common.CnATreeElement;
+import sernet.verinice.model.dataprotection.DataNetwork;
 import sernet.verinice.model.iso27k.Organization;
 import sernet.verinice.rcp.MultiselectWidget;
 import sernet.verinice.service.commands.crud.LoadCnAElementByType;
@@ -55,6 +56,7 @@ public class ScopeMultiselectWidget extends MultiselectWidget<CnATreeElement> {
         elementClasses.add(Organization.class);
         elementClasses.add(ITVerbund.class);
         elementClasses.add(ItNetwork.class);
+        elementClasses.add(DataNetwork.class);
         return elementClasses;
     }
 

@@ -11496,10 +11496,6 @@ Wurden bereits weitere Stellen informiert?
                     name="" />
                 <option
                     id="data_process_type_technical"/>
-                <option
-                    id="data_process_type_sensitive"/>
-                <option
-                    id="data_process_type_personal"/>
         </huiproperty>          
         <huipropertygroup
             id="data_process_group_schutzbedarf"

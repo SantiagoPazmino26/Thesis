@@ -54,6 +54,7 @@ import sernet.verinice.interfaces.validation.IValidationService;
 import sernet.verinice.model.bp.elements.ItNetwork;
 import sernet.verinice.model.bsi.ITVerbund;
 import sernet.verinice.model.common.CnATreeElement;
+import sernet.verinice.model.dataprotection.DataNetwork;
 import sernet.verinice.model.iso27k.Audit;
 import sernet.verinice.model.iso27k.Organization;
 import sernet.verinice.model.report.ReportTemplateMetaData;
@@ -591,6 +592,7 @@ public class GenerateReportDialog extends TitleAreaDialog {
         scopes.addAll(loadScopes());
         scopes.addAll(loadITVerbuende());
         scopes.addAll(loadItNetworks());
+        scopes.addAll(loadDataNetworks());
 
         List<String> scopeTitles = new ArrayList<>();
 
@@ -858,6 +860,17 @@ public class GenerateReportDialog extends TitleAreaDialog {
             compoundLoader = ServiceFactory.lookupCommandService().executeCommand(compoundLoader);
         } catch (Exception e) {
             ExceptionUtil.log(e, Messages.GenerateReportDialog_38);
+        }
+        return compoundLoader.getElements();
+    }
+    
+    private List<DataNetwork> loadDataNetworks() {
+        LoadCnATreeElementTitles<DataNetwork> compoundLoader = new LoadCnATreeElementTitles<>(
+                DataNetwork.class);
+        try {
+            compoundLoader = ServiceFactory.lookupCommandService().executeCommand(compoundLoader);
+        } catch (Exception e) {
+            ExceptionUtil.log(e, Messages.GenerateReportDialog_39);
         }
         return compoundLoader.getElements();
     }

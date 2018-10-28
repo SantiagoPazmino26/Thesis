@@ -31,8 +31,8 @@ implements IBSIStrukturElement {
             log = Logger.getLogger(Data.class);
         }
         return log;
-    }
-	
+    }	
+    
 	public static final String PROP_TAG			= "data_tag"; //$NON-NLS-1$
 	public static final String PROP_NAME = "data_name"; //$NON-NLS-1$
 	public static final String PROP_KUERZEL = "data_kuerzel"; //$NON-NLS-1$
