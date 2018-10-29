@@ -182,7 +182,7 @@ public class CreateElement<T extends CnATreeElement> extends ChangeLoggingComman
     }
 
     private boolean isScope() {
-        return isOrganization() || isItVerbund() || isItNetwork();
+        return isOrganization() || isItVerbund() || isItNetwork() || isDataNetwork();
     }
 
     private boolean isOrganization() {
