@@ -88,6 +88,8 @@ import sernet.verinice.model.dataprotection.DataKategorie;
 import sernet.verinice.model.dataprotection.DataNetwork;
 import sernet.verinice.model.dataprotection.DataProcess;
 import sernet.verinice.model.dataprotection.DataProcessKategorie;
+import sernet.verinice.model.dataprotection.DataStakeholder;
+import sernet.verinice.model.dataprotection.DataStakeholderKategorie;
 import sernet.verinice.model.dataprotection.IDpElement;
 import sernet.verinice.model.ds.Datenverarbeitung;
 import sernet.verinice.model.ds.IDatenschutzElement;
@@ -259,6 +261,8 @@ public final class CnATypeMapper {
         typeIdClass.put(DataKategorie.TYPE_ID, DataKategorie.class);
         typeIdClass.put(DataProcessKategorie.TYPE_ID, DataProcessKategorie.class);
         typeIdClass.put(DataNetwork.TYPE_ID, DataNetwork.class);
+        typeIdClass.put(DataStakeholderKategorie.TYPE_ID, DataStakeholderKategorie.class);
+        typeIdClass.put(DataStakeholder.TYPE_ID, DataStakeholder.class);
 
         // map for description properties:
         descriptionPropertyMap.put(Client.TYPE_ID, Client.PROP_ERLAEUTERUNG);
@@ -296,7 +300,7 @@ public final class CnATypeMapper {
             BpDocumentGroup.TYPE_ID, BpIncidentGroup.TYPE_ID, BpRecordGroup.TYPE_ID };
     
     private static final String[] DP_ELEMENT_TYPES = new String[] { DataNetwork.TYPE_ID, 
-    		DataProcess.TYPE_ID, Data.TYPE_ID };    
+    		DataProcess.TYPE_ID, Data.TYPE_ID , DataStakeholder.TYPE_ID};    
 
     public static boolean isStrukturElement(CnATreeElement child) {
         EntityType entityType = child.getEntityType();

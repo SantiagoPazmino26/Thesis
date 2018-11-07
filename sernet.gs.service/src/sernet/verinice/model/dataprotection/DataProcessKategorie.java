@@ -1,10 +1,9 @@
 package sernet.verinice.model.dataprotection;
 
-import sernet.verinice.model.bsi.IBSIStrukturKategorie;
 import sernet.verinice.model.common.CnATreeElement;
 
 public class DataProcessKategorie extends CnATreeElement 
-implements IBSIStrukturKategorie {
+implements IDpElement {
 	
     private static final long serialVersionUID = 1L;
     public static final String TYPE_ID = "processkategorie"; //$NON-NLS-1$

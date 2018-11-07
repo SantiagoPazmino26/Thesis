@@ -3,18 +3,18 @@ package sernet.verinice.model.dataprotection;
 
 import sernet.verinice.model.common.CnATreeElement;
 
-public class DataKategorie extends CnATreeElement 
+public class DataStakeholderKategorie extends CnATreeElement 
 implements IDpElement {
 	
     private static final long serialVersionUID = 1L;
-    public static final String TYPE_ID = "datakategorie"; //$NON-NLS-1$
-	public static final String TYPE_ID_HIBERNATE = "data-kategorie"; //$NON-NLS-1$
+    public static final String TYPE_ID = "data_stakeholder_kategorie"; //$NON-NLS-1$
+	public static final String TYPE_ID_HIBERNATE = "data-stakeholder-kategorie"; //$NON-NLS-1$
 
-	public DataKategorie(CnATreeElement model) {
+	public DataStakeholderKategorie(CnATreeElement model) {
 		super(model);
 	}
 	
-	protected DataKategorie() {
+	protected DataStakeholderKategorie() {
 		
 	}
 	@Override

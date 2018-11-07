@@ -72,6 +72,8 @@ import sernet.verinice.model.dataprotection.DataNetwork;
 import sernet.verinice.model.dataprotection.Data;
 import sernet.verinice.model.dataprotection.DataProcess;
 import sernet.verinice.model.dataprotection.DataProtectionModel;
+import sernet.verinice.model.dataprotection.DataStakeholder;
+import sernet.verinice.model.dataprotection.DataStakeholderKategorie;
 import sernet.verinice.model.dataprotection.IDpElement;
 import sernet.verinice.model.bsi.Anwendung;
 import sernet.verinice.model.bsi.AnwendungenKategorie;
@@ -565,6 +567,10 @@ public final class CnAElementFactory {
                 new DefaultElementBuilder(DataProcess.TYPE_ID));
         elementbuilders.put(DataKategorie.TYPE_ID,
                 new DefaultElementBuilder(DataKategorie.TYPE_ID));
+        elementbuilders.put(DataStakeholderKategorie.TYPE_ID,
+                new DefaultElementBuilder(DataStakeholderKategorie.TYPE_ID));
+        elementbuilders.put(DataStakeholder.TYPE_ID,
+                new DefaultElementBuilder(DataStakeholder.TYPE_ID));
     }
 
     public static CnAElementFactory getInstance() {

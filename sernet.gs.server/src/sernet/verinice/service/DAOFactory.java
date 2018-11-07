@@ -110,6 +110,8 @@ import sernet.verinice.model.dataprotection.DataNetwork;
 import sernet.verinice.model.dataprotection.DataProcess;
 import sernet.verinice.model.dataprotection.DataProcessKategorie;
 import sernet.verinice.model.dataprotection.DataProtectionModel;
+import sernet.verinice.model.dataprotection.DataStakeholder;
+import sernet.verinice.model.dataprotection.DataStakeholderKategorie;
 import sernet.verinice.model.ds.Datenverarbeitung;
 import sernet.verinice.model.ds.Personengruppen;
 import sernet.verinice.model.ds.StellungnahmeDSB;
@@ -865,6 +867,16 @@ public class DAOFactory implements IDAOFactory {
     public void setDataDAO(IBaseDao<Data, Integer> daoToSet) {
         daosByClass.put(Data.class, daoToSet);
         daosByTypeID.put(Data.TYPE_ID, daoToSet);
+    }
+    
+    public void setDataStakeholderKategorieDAO(IBaseDao<DataStakeholderKategorie, Integer> daoToSet) {
+        daosByClass.put(DataStakeholderKategorie.class, daoToSet);
+        daosByTypeID.put(DataStakeholderKategorie.TYPE_ID, daoToSet);
+    }
+
+    public void setDataStakeholderDAO(IBaseDao<DataStakeholder, Integer> daoToSet) {
+        daosByClass.put(DataStakeholder.class, daoToSet);
+        daosByTypeID.put(DataStakeholder.TYPE_ID, daoToSet);
     }
     
     /* Miscellaneous Daos */

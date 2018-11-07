@@ -283,6 +283,8 @@ This variant:
     	<property name="dataProcessKategorieDAO" ref="dataProcessKategorieDAO" />
     	<property name="dataProcessDAO" ref="dataProcessDAO" />
     	<property name="dataDAO" ref="dataDAO" />
+    	<property name="dataStakeholderKategorieDAO" ref="dataStakeholderKategorieDAO" />
+    	<property name="dataStakeholderDAO" ref="dataStakeholderDAO" />
 
         <!-- Miscellaneous DAOs -->
         <property name="importIsoDAO" ref="importIsoDAO" /> 

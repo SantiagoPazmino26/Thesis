@@ -41,6 +41,7 @@ public class DataNetwork extends CnATreeElement implements IDpElement, ITaggable
     public void createNewCategories() {
         addChild(new DataKategorie(this));
         addChild(new DataProcessKategorie(this));
+        addChild(new DataStakeholderKategorie(this));
     }
     
     @Override

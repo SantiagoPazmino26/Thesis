@@ -143,6 +143,8 @@ import sernet.verinice.model.dataprotection.DataKategorie;
 import sernet.verinice.model.dataprotection.DataNetwork;
 import sernet.verinice.model.dataprotection.DataProcessKategorie;
 import sernet.verinice.model.dataprotection.DataProtectionModel;
+import sernet.verinice.model.dataprotection.DataStakeholder;
+import sernet.verinice.model.dataprotection.DataStakeholderKategorie;
 
 public interface IDAOFactory {
 
@@ -626,6 +628,8 @@ public interface IDAOFactory {
     
     void setDataProtectionModelDAO(IBaseDao<DataProtectionModel, Integer> daoToSet);
 
+	void setDataStakeholderKategorieDAO(IBaseDao<DataStakeholderKategorie, Integer> daoToSet);
 
+	void setDataStakeholderDAO(IBaseDao<DataStakeholder, Integer> daoToSet);
 
 }

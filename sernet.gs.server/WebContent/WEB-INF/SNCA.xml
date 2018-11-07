@@ -10932,6 +10932,88 @@ Wurden bereits weitere Stellen informiert?
         <huiproperty id="data_network_abbr" name="Abbreviation" />
         <huiproperty id="data_network_tag" name="Tags" tooltip="List of tags, separated by comma or space" />
         <huiproperty id="data_network_description" name="Description" />
+        <huiproperty
+            name="Purposes"
+            inputtype="text"
+            id="data_network_purposes"/>
+        <huiproperty
+            name="Stakes"
+            inputtype="text"
+            id="data_network_stakes"/>
+        <huiproperty
+            name="Lawfulness criteria 1"
+            id="data_network_lawfulness_1"
+            inputtype="singleoption">
+                <option
+                    id="data_network_yes"/>
+                <option
+                    id="data_network_no"/>
+        <huiproperty
+             name="Justification"
+             inputtype="text"
+             id="data_network_lawfulness_1_justification" />                       
+        <huiproperty
+            name="Lawfulness criteria 2"
+            id="data_network_lawfulness_2"
+            inputtype="singleoption">
+                <option
+                    id="data_network_yes"/>
+                <option
+                    id="data_network_no"/>
+        <huiproperty
+             name="Justification"
+             inputtype="text"
+             id="data_network_lawfulness_2_justification" />                       
+        <huiproperty
+            name="Lawfulness criteria 3"
+            id="data_network_lawfulness_3"
+            inputtype="singleoption">
+                <option
+                    id="data_network_yes"/>
+                <option
+                    id="data_network_no"/>
+        <huiproperty
+             name="Justification"
+             inputtype="text"
+             id="data_network_lawfulness_3_justification" />                      
+        <huiproperty
+            name="Lawfulness criteria 4"
+            id="data_network_lawfulness_4"
+            inputtype="singleoption">
+                <option
+                    id="data_network_yes"/>
+                <option
+                    id="data_network_no"/>
+        <huiproperty
+             name="Justification"
+             inputtype="text"
+             id="data_network_lawfulness_4_justification" />                     
+        <huiproperty
+            name="Lawfulness criteria 5"
+            id="data_network_lawfulness_5"
+            inputtype="singleoption">
+                <option
+                    id="data_network_yes"/>
+                <option
+                    id="data_network_no"/>
+        <huiproperty
+             name="Justification"
+             inputtype="text"
+             id="data_network_lawfulness_5_justification" />                    
+        <huiproperty
+            name="Lawfulness criteria 6"
+            id="data_network_lawfulness_6"
+            inputtype="singleoption">
+                <option
+                    id="data_network_yes"/>
+                <option
+                    id="data_network_no"/>
+        <huiproperty
+             name="Justification"
+             inputtype="text"
+             id="data_network_lawfulness_6_justification" />                    
+                                        
+                                           
         <huiproperty id="data_network_qualifier" name="Qualifier" required="true" inputtype="singleoption" >
                 <option id="data_network_qualifier_basic" name="BASIC" value="0"/>
                 <option id="data_network_qualifier_standard" name="STANDARD" value="1"/>
@@ -11274,7 +11356,7 @@ Wurden bereits weitere Stellen informiert?
                     id="data_consent_true"/>
                 <option
                     id="data_consent_false"/>
-        </huiproperty>
+        </huiproperty>        
         <huiproperty
             name="Type of Information"
             id="data_information_type"
@@ -11285,7 +11367,14 @@ Wurden bereits weitere Stellen informiert?
                     id="data_information_type_observed"/>
                                     <option
                     id="data_information_type_inferred"/>
-        </huiproperty>     
+        </huiproperty>
+        <huiproperty
+            name="Storage Duration"
+            id="data_storage_duration" />
+        <huiproperty
+            name="Justification"
+            inputtype="text"
+            id="data_justification"/>                             
         <huipropertygroup
             id="data_group_schutzbedarf"
             name="Schutzbedarf">
@@ -11487,8 +11576,9 @@ Wurden bereits weitere Stellen informiert?
             name="Erläuterung"
             inputtype="text"
             id="data_process_erlaeuterung"/>
+        <huiproperty id="data_process_document" isURL="true" name="Process diagram" />                                 
         <huiproperty
-            name="Data type"
+            name="Process type"
             id="data_process_type"
             inputtype="singleoption">
                 <option
@@ -11496,7 +11586,15 @@ Wurden bereits weitere Stellen informiert?
                     name="" />
                 <option
                     id="data_process_type_technical"/>
-        </huiproperty>          
+        </huiproperty>  
+        <huiproperty
+            name="Purposes"
+            inputtype="text"
+            id="data_process_purposes"/>
+        <huiproperty
+            name="Stakes"
+            inputtype="text"
+            id="data_process_legitimacy"/>                          
         <huipropertygroup
             id="data_process_group_schutzbedarf"
             name="Schutzbedarf">
@@ -11635,6 +11733,69 @@ Wurden bereits weitere Stellen informiert?
                 id="data_process_minimization_begruendung" />                                              
         </huipropertygroup>
     </huientity>
+    
+    <huientity
+        name="Data Stakeholder"
+        id="data_stakeholder">
+
+        <huirelation to="data_process" id="rel_data_stakeholder_data_process"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huirelation to="data" id="rel_data_stakeholder_data"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
+        <huiproperty
+            name="Kürzel"
+            id="data_stakeholder_kuerzel"
+            focus="true">
+                <defaultRule class="SimpleValue">
+                    <param id="data_stakeholder_kuerzel_default">SH-</param>
+                </defaultRule>
+        </huiproperty>
+        <huiproperty
+            name="Name"
+            id="data_stakeholder_name"
+            required="true"/>
+
+        <huiproperty
+            id="data_stakeholder_tag"
+            name="Tags"
+            tooltip="Liste von Tags, getrennt durch Komma oder Leerzeichen"
+        />
+
+        <huiproperty
+            name="Anzahl"
+            id="data_stakeholder_anzahl" />
+        <huiproperty
+            name="Telefon"
+            id="data_stakeholder_telefon" />
+        <huiproperty
+            name="E-Mail"
+            id="data_stakeholder_email" />
+
+        <huiproperty
+            name="Rollen"
+            id="data_stakeholder_rollen"
+            tooltip="Zugewiesene Rollen Stakeholder"
+            required="false"
+            inputtype="multioption">
+            
+            <option
+                id="data_stakeholder_1"
+                name="Controller" />
+            <option
+                id="data_stakeholder_2"
+                name="Processor" />
+            <option
+                id="data_stakeholder_3"
+                name="Data Subject" />
+        </huiproperty>
+        <huiproperty
+            name="Dokument"
+            id="person_dokument"
+            isURL="true" />
+    </huientity>
+    
     
     
 </huientities>
