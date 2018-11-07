@@ -72,6 +72,7 @@ import sernet.verinice.model.dataprotection.DataNetwork;
 import sernet.verinice.model.dataprotection.Data;
 import sernet.verinice.model.dataprotection.DataProcess;
 import sernet.verinice.model.dataprotection.DataProtectionModel;
+import sernet.verinice.model.dataprotection.IDpElement;
 import sernet.verinice.model.bsi.Anwendung;
 import sernet.verinice.model.bsi.AnwendungenKategorie;
 import sernet.verinice.model.bsi.BSIModel;
@@ -795,7 +796,7 @@ public final class CnAElementFactory {
             model = CnAElementFactory.getInstance().getISO27kModel();
         } else if (element instanceof BpModel || element instanceof IBpElement) {
             model = CnAElementFactory.getInstance().getBpModel();
-        } else if (element instanceof DataProtectionModel) {
+        } else if (element instanceof DataProtectionModel || element instanceof IDpElement) {
             model = CnAElementFactory.getInstance().getDataProtectionModel();
         }  else {
             model = CnAElementFactory.getLoadedModel();
@@ -1216,6 +1217,6 @@ public final class CnAElementFactory {
 
     public static boolean isScope(Object element) {
         return element instanceof ItNetwork || element instanceof Organization
-                || element instanceof ITVerbund;
+                || element instanceof ITVerbund || element instanceof DataNetwork;
     }
 }

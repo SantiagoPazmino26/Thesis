@@ -88,6 +88,7 @@ import sernet.verinice.model.dataprotection.DataKategorie;
 import sernet.verinice.model.dataprotection.DataNetwork;
 import sernet.verinice.model.dataprotection.DataProcess;
 import sernet.verinice.model.dataprotection.DataProcessKategorie;
+import sernet.verinice.model.dataprotection.IDpElement;
 import sernet.verinice.model.ds.Datenverarbeitung;
 import sernet.verinice.model.ds.IDatenschutzElement;
 import sernet.verinice.model.ds.Personengruppen;
@@ -278,7 +279,7 @@ public final class CnATypeMapper {
     private static final String[] STRUKTUR_ELEMENT_TYPES = new String[] { Anwendung.TYPE_ID,
             BSIModel.TYPE_ID, Client.TYPE_ID, Gebaeude.TYPE_ID, ITVerbund.TYPE_ID,
             NetzKomponente.TYPE_ID, Person.TYPE_ID, Raum.TYPE_ID, Server.TYPE_ID, SonstIT.TYPE_ID,
-            TelefonKomponente.TYPE_ID, DataNetwork.TYPE_ID, DataProcess.TYPE_ID, Data.TYPE_ID };
+            TelefonKomponente.TYPE_ID };
 
     private static final String[] IISO27K_ELEMENT_TYPES = new String[] { ResponseGroup.TYPE_ID,
             ExceptionGroup.TYPE_ID, VulnerabilityGroup.TYPE_ID, PersonGroup.TYPE_ID,
@@ -293,6 +294,9 @@ public final class CnATypeMapper {
             BusinessProcessGroup.TYPE_ID, DeviceGroup.TYPE_ID, IcsSystemGroup.TYPE_ID,
             ItSystemGroup.TYPE_ID, NetworkGroup.TYPE_ID, RoomGroup.TYPE_ID, SafeguardGroup.TYPE_ID,
             BpDocumentGroup.TYPE_ID, BpIncidentGroup.TYPE_ID, BpRecordGroup.TYPE_ID };
+    
+    private static final String[] DP_ELEMENT_TYPES = new String[] { DataNetwork.TYPE_ID, 
+    		DataProcess.TYPE_ID, Data.TYPE_ID };    
 
     public static boolean isStrukturElement(CnATreeElement child) {
         EntityType entityType = child.getEntityType();
@@ -332,6 +336,19 @@ public final class CnATypeMapper {
         }
         return false;
     }
+    
+    public static boolean isDpElement(CnATreeElement child) {
+        EntityType entityType = child.getEntityType();
+        if (entityType == null) {
+            return false;
+        }
+        for (String strukturType : DP_ELEMENT_TYPES) {
+            if (entityType.getId().equals(strukturType)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /************************************************************
      * getClassFromTypeId()
@@ -354,6 +371,9 @@ public final class CnATypeMapper {
         Class<Object> clazz = getClassFromTypeId(typeId);
         if (IBpElement.class.isAssignableFrom(clazz)) {
             return Domain.BASE_PROTECTION;
+        }
+        if (IDpElement.class.isAssignableFrom(clazz)) {
+            return Domain.DATA_PROTECTION_NEW;
         }
         if (IISO27kElement.class.isAssignableFrom(clazz)) {
             return Domain.ISM;

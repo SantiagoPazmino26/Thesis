@@ -22,7 +22,7 @@ import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.ILinkChangeListener;
 
 public class Data extends CnATreeElement
-implements IBSIStrukturElement {
+implements IDpElement {
     
     private transient Logger log = Logger.getLogger(Data.class);
 
@@ -54,24 +54,10 @@ implements IBSIStrukturElement {
 		getEntity().initDefaultValues(getTypeFactory());
         // sets the localized title via HUITypeFactory from message bundle
         setTitel(getTypeFactory().getMessage(TYPE_ID));
-    }
-	
-	@Override
-    public String getKuerzel() {
-		return getEntity().getSimpleValue(PROP_KUERZEL);
-	}
-	@Override
-    public Collection<? extends String> getTags() {
-		return TagHelper.getTags(getEntity().getSimpleValue(PROP_TAG));
-	}
+    }	
 	
 	protected Data() {
 		
-	}
-	
-	@Override
-    public int getSchicht() {
-		return 0;
 	}	
 	
 	@Override
@@ -138,7 +124,7 @@ implements IBSIStrukturElement {
 
     @Override
     public String toString() {
-        return "Person [getFullName()=" + getName() + ", getKuerzel()=" + getKuerzel()
+        return "Person [getFullName()=" + getName()
                 + ", getId()=" + getId() + "]";
     }
 }

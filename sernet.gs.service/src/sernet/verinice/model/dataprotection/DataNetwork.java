@@ -2,23 +2,7 @@ package sernet.verinice.model.dataprotection;
 
 import java.util.Collection;
 
-import sernet.verinice.model.bp.IBpElement;
-import sernet.verinice.model.bp.elements.BpRequirement;
 import sernet.hui.common.connect.ITaggableElement;
-import sernet.verinice.model.bp.groups.ApplicationGroup;
-import sernet.verinice.model.bp.groups.BpDocumentGroup;
-import sernet.verinice.model.bp.groups.BpIncidentGroup;
-import sernet.verinice.model.bp.groups.BpPersonGroup;
-import sernet.verinice.model.bp.groups.BpRecordGroup;
-import sernet.verinice.model.bp.groups.BpRequirementGroup;
-import sernet.verinice.model.bp.groups.BpThreatGroup;
-import sernet.verinice.model.bp.groups.BusinessProcessGroup;
-import sernet.verinice.model.bp.groups.DeviceGroup;
-import sernet.verinice.model.bp.groups.IcsSystemGroup;
-import sernet.verinice.model.bp.groups.ItSystemGroup;
-import sernet.verinice.model.bp.groups.NetworkGroup;
-import sernet.verinice.model.bp.groups.RoomGroup;
-import sernet.verinice.model.bp.groups.SafeguardGroup;
 import sernet.verinice.model.bsi.TagHelper;
 import sernet.verinice.model.common.CnATreeElement;
 
@@ -28,7 +12,7 @@ import sernet.verinice.model.common.CnATreeElement;
  * @author Santiago Pazmino
  */
 
-public class DataNetwork extends CnATreeElement implements IBpElement, ITaggableElement  {
+public class DataNetwork extends CnATreeElement implements IDpElement, ITaggableElement  {
     
     private static final long serialVersionUID = 0L;
        

@@ -23,7 +23,8 @@ package sernet.verinice.model.common;
 public enum Domain {
     ISM(Messages.getString("Domain.ISM")), BASE_PROTECTION_OLD(
             Messages.getString("Domain.BASE_PROTECTION_OLD")), BASE_PROTECTION(
-                    Messages.getString("Domain.BASE_PROTECTION")), @Deprecated
+                    Messages.getString("Domain.BASE_PROTECTION")), DATA_PROTECTION_NEW(
+                            Messages.getString("Domain.DATA_PROTECTION_NEW")), @Deprecated
     DATA_PROTECTION(Messages.getString("Domain.DATA_PROTECTION"));
 
     private final String label;
