@@ -631,7 +631,17 @@
 	<subclass 
 		name="sernet.verinice.model.dataprotection.Data"
 		extends="CnATreeElement"
-		discriminator-value="data" />							
+		discriminator-value="data" />
+		
+	<subclass 
+		name="sernet.verinice.model.dataprotection.DataStakeholderKategorie"
+		extends="CnATreeElement"
+		discriminator-value="data_stakeholder_kategorie" />							
+
+	<subclass 
+		name="sernet.verinice.model.dataprotection.DataStakeholder"
+		extends="CnATreeElement"
+		discriminator-value="data_stakeholder" />										
 	
 	
 </hibernate-mapping>

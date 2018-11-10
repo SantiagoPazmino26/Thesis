@@ -59,6 +59,7 @@ import sernet.verinice.model.bsi.risikoanalyse.FinishedRiskAnalysis;
 import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.dataprotection.DataKategorie;
 import sernet.verinice.model.dataprotection.DataProcessKategorie;
+import sernet.verinice.model.dataprotection.DataStakeholderKategorie;
 import sernet.verinice.model.iso27k.Audit;
 import sernet.verinice.model.iso27k.Organization;
 import sernet.verinice.service.commands.CnATypeMapper;
@@ -207,6 +208,7 @@ public class HUIObjectModelService implements IObjectModelService {
     	allDpCategories = new HashSet<String>();
     	allDpCategories.add(DataKategorie.TYPE_ID);
     	allDpCategories.add(DataProcessKategorie.TYPE_ID);
+    	allDpCategories.add(DataStakeholderKategorie.TYPE_ID);
         allTypeIds.addAll(allDpCategories);
     }
     

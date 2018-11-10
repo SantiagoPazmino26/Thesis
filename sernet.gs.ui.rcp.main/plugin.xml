@@ -1362,6 +1362,20 @@
       </objectContribution>
       <objectContribution
             adaptable="false"
+            id="sernet.verinice.dataprotection.dataStakeholderContrib"
+            objectClass="sernet.verinice.model.dataprotection.DataStakeholderKategorie">
+         <action
+               class="sernet.verinice.dataprotection.actions.AddDataStakeholderActionDelegate"
+               enablesFor="+"
+               icon="icons/phone.png"
+               id="sernet.verinice.dataprotection.addStakeholder"
+               label="%action.label.43"
+               menubarPath="content"
+               style="push"
+               tooltip="%action.tooltip.43"/>
+      </objectContribution>      
+      <objectContribution
+            adaptable="false"
             id="sernet.verinice.dataprotection.dataProcessContrib"
             objectClass="sernet.verinice.model.dataprotection.DataProcessKategorie">
          <action

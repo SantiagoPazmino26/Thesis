@@ -31,7 +31,7 @@ implements IDpElement {
 	
 	@Override
 	public boolean canContain(Object obj) {
-		if (obj instanceof Data){
+		if (obj instanceof DataStakeholder){
 			return true;
 		}
 		return false;

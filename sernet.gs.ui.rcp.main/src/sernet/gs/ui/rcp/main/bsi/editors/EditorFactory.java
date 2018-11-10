@@ -82,6 +82,7 @@ import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.dataprotection.Data;
 import sernet.verinice.model.dataprotection.DataNetwork;
 import sernet.verinice.model.dataprotection.DataProcess;
+import sernet.verinice.model.dataprotection.DataStakeholder;
 import sernet.verinice.model.ds.Datenverarbeitung;
 import sernet.verinice.model.ds.Personengruppen;
 import sernet.verinice.model.ds.StellungnahmeDSB;
@@ -380,6 +381,7 @@ public final class EditorFactory {
         typedFactories.put(DataNetwork.class, bsiEditorFactory);
         typedFactories.put(Data.class, bsiEditorFactory);
         typedFactories.put(DataProcess.class, bsiEditorFactory);
+        typedFactories.put(DataStakeholder.class, bsiEditorFactory);
         
         // Self Assessment (SAMT) elements
         typedFactories.put(SamtTopic.class, bsiEditorFactory);

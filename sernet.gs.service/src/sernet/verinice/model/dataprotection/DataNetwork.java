@@ -46,7 +46,7 @@ public class DataNetwork extends CnATreeElement implements IDpElement, ITaggable
     
     @Override
     public boolean canContain(Object object) {
-        return object instanceof DataKategorie || object instanceof DataProcessKategorie
+        return object instanceof DataKategorie || object instanceof DataProcessKategorie || object instanceof DataStakeholderKategorie
                 ;
     }
 

@@ -10939,80 +10939,103 @@ Wurden bereits weitere Stellen informiert?
         <huiproperty
             name="Stakes"
             inputtype="text"
-            id="data_network_stakes"/>
+            id="data_network_stakes"/>                                                        
+                  
+	    <huipropertygroup id="data_network_lawfulness_1" name="Lawfulness criteria 1">
         <huiproperty
-            name="Lawfulness criteria 1"
-            id="data_network_lawfulness_1"
+            name="Applicable_1"
+            id="data_network_lawfulness_1_applicable"
             inputtype="singleoption">
                 <option
-                    id="data_network_yes"/>
+                    id="data_network_lawfulness_1_yes"/>
                 <option
-                    id="data_network_no"/>
+                    id="data_network_lawfulness_1_no"/>
+        </huiproperty>                    
         <huiproperty
-             name="Justification"
+             name="Justification_1"
              inputtype="text"
-             id="data_network_lawfulness_1_justification" />                       
+             id="data_network_lawfulness_1_justification" />
+        </huipropertygroup>
+        
+	    <huipropertygroup id="data_network_lawfulness_2" name="Lawfulness criteria 2">
         <huiproperty
-            name="Lawfulness criteria 2"
-            id="data_network_lawfulness_2"
+            name="Applicable_2"
+            id="data_network_lawfulness_2_applicable"
             inputtype="singleoption">
                 <option
-                    id="data_network_yes"/>
+                    id="data_network_lawfulness_2_yes"/>
                 <option
-                    id="data_network_no"/>
+                    id="data_network_lawfulness_2_no"/>
+        </huiproperty>                    
         <huiproperty
-             name="Justification"
+             name="Justification_2"
              inputtype="text"
-             id="data_network_lawfulness_2_justification" />                       
+             id="data_network_lawfulness_2_justification" />
+        </huipropertygroup>        
+        
+	    <huipropertygroup id="data_network_lawfulness_3" name="Lawfulness criteria 3">
         <huiproperty
-            name="Lawfulness criteria 3"
-            id="data_network_lawfulness_3"
+            name="Applicable_3"
+            id="data_network_lawfulness_3_applicable"
             inputtype="singleoption">
                 <option
-                    id="data_network_yes"/>
+                    id="data_network_lawfulness_3_yes"/>
                 <option
-                    id="data_network_no"/>
+                    id="data_network_lawfulness_3_no"/>
+        </huiproperty>                    
         <huiproperty
-             name="Justification"
+             name="Justification_3"
              inputtype="text"
-             id="data_network_lawfulness_3_justification" />                      
+             id="data_network_lawfulness_3_justification" />
+        </huipropertygroup>                                             
+
+	    <huipropertygroup id="data_network_lawfulness_4" name="Lawfulness criteria 4">
         <huiproperty
-            name="Lawfulness criteria 4"
-            id="data_network_lawfulness_4"
+            name="Applicable_4"
+            id="data_network_lawfulness_4_applicable"
             inputtype="singleoption">
                 <option
-                    id="data_network_yes"/>
+                    id="data_network_lawfulness_4_yes"/>
                 <option
-                    id="data_network_no"/>
+                    id="data_network_lawfulness_4_no"/>
+        </huiproperty>                    
         <huiproperty
-             name="Justification"
+             name="Justification_4"
              inputtype="text"
-             id="data_network_lawfulness_4_justification" />                     
+             id="data_network_lawfulness_4_justification" />
+        </huipropertygroup>
+        
+	    <huipropertygroup id="data_network_lawfulness_5" name="Lawfulness criteria 5">
         <huiproperty
-            name="Lawfulness criteria 5"
-            id="data_network_lawfulness_5"
+            name="Applicable_5"
+            id="data_network_lawfulness_5_applicable"
             inputtype="singleoption">
                 <option
-                    id="data_network_yes"/>
+                    id="data_network_lawfulness_5_yes"/>
                 <option
-                    id="data_network_no"/>
+                    id="data_network_lawfulness_5_no"/>
+        </huiproperty>                    
         <huiproperty
-             name="Justification"
+             name="Justification_5"
              inputtype="text"
-             id="data_network_lawfulness_5_justification" />                    
+             id="data_network_lawfulness_5_justification" />
+        </huipropertygroup>  
+        
+	    <huipropertygroup id="data_network_lawfulness_6" name="Lawfulness criteria 6">
         <huiproperty
-            name="Lawfulness criteria 6"
-            id="data_network_lawfulness_6"
+            name="Applicable_6"
+            id="data_network_lawfulness_6_applicable"
             inputtype="singleoption">
                 <option
-                    id="data_network_yes"/>
+                    id="data_network_lawfulness_6_yes"/>
                 <option
-                    id="data_network_no"/>
+                    id="data_network_lawfulness_6_no"/>
+        </huiproperty>                    
         <huiproperty
-             name="Justification"
+             name="Justification_6"
              inputtype="text"
-             id="data_network_lawfulness_6_justification" />                    
-                                        
+             id="data_network_lawfulness_6_justification" />
+        </huipropertygroup>                                                
                                            
         <huiproperty id="data_network_qualifier" name="Qualifier" required="true" inputtype="singleoption" >
                 <option id="data_network_qualifier_basic" name="BASIC" value="0"/>
@@ -11020,6 +11043,31 @@ Wurden bereits weitere Stellen informiert?
                 <option id="data_network_qualifier_high" name="HIGH" value="2"/>
         </huiproperty>
         <huiproperty id="data_network_document" isURL="true" name="Document" />
+
+	        <huipropertygroup id="data_network_common_data" name="Common Data">
+    	        <huiproperty id="data_network_common_data_duration" name="Duration"/>
+        	    <huiproperty id="data_network_common_data_justification" name="Justification"/>
+            	<huiproperty id="data_network_common_data_erasure" name="Erasure Method"/>
+        	</huipropertygroup>
+        	
+	        <huipropertygroup id="data_network_archived_data" name="Archived Data">
+    	        <huiproperty id="data_network_archived_data_duration" name="Duration"/>
+        	    <huiproperty id="data_network_archived_data_justification" name="Justification"/>
+            	<huiproperty id="data_network_archived_data_erasure" name="Erasure Method"/>
+        	</huipropertygroup>        	
+
+	        <huipropertygroup id="data_network_functional_traces" name="Functional Traces">
+    	        <huiproperty id="data_network_functional_traces_duration" name="Duration"/>
+        	    <huiproperty id="data_network_functional_traces_justification" name="Justification"/>
+            	<huiproperty id="data_network_functional_traces_erasure" name="Erasure Method"/>
+        	</huipropertygroup>
+
+	        <huipropertygroup id="data_network_technical" name="Technical Log">
+    	        <huiproperty id="data_network_technical_duration" name="Duration"/>
+        	    <huiproperty id="data_network_technical_justification" name="Justification"/>
+            	<huiproperty id="data_network_technical_erasure" name="Erasure Method"/>
+        	</huipropertygroup>        	
+        
         <huipropertygroup id="data_network_report" name="Reporting" tags="Dok.mgmt.">
             <huiproperty id="data_network_author" name="Author" tags="Dok.mgmt." />
             <huiproperty id="data_network_version" name="Version" tags="Dok.mgmt." />
@@ -11792,7 +11840,7 @@ Wurden bereits weitere Stellen informiert?
         </huiproperty>
         <huiproperty
             name="Dokument"
-            id="person_dokument"
+            id="data_stakeholder_dokument"
             isURL="true" />
     </huientity>
     
