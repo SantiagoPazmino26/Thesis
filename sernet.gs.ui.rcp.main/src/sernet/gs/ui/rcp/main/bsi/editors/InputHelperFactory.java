@@ -40,6 +40,7 @@ import sernet.verinice.model.bsi.Schutzbedarf;
 import sernet.verinice.model.bsi.Server;
 import sernet.verinice.model.bsi.SonstIT;
 import sernet.verinice.model.bsi.TelefonKomponente;
+import sernet.verinice.model.dataprotection.DataStakeholder;
 import sernet.verinice.model.iso27k.Asset;
 import sernet.verinice.model.iso27k.Audit;
 import sernet.verinice.model.iso27k.Control;
@@ -64,6 +65,7 @@ public class InputHelperFactory {
     private static IInputHelper schutzbedarfHelper;
     private static IInputHelper tagHelper;
     private static IInputHelper personHelper;
+    private static IInputHelper dataStakeholderHelper;
 
     public static void setInputHelpers(EntityType entityType, HitroUIComposite huiComposite2) {
         //
@@ -82,6 +84,26 @@ public class InputHelperFactory {
                     } catch (CommandException e) {
                         ExceptionUtil.log(e, Messages.InputHelperFactory_1);
                         return new String[] { Messages.InputHelperFactory_0 };
+                    }
+                }
+            };
+        }
+        
+        if (dataStakeholderHelper == null) {
+        	dataStakeholderHelper = new IInputHelper() {
+                public String[] getSuggestions() {
+                    List<DataStakeholder> stakeholders;
+                    try {
+                    	stakeholders = CnAElementHome.getInstance().getDataStakeholders();
+                        String[] titles = new String[stakeholders.size()];
+                        int i = 0;
+                        for (DataStakeholder stakeholder : stakeholders) {
+                            titles[i++] = stakeholder.getTitle();
+                        }
+                        return titles.length > 0 ? titles : new String[] { Messages.InputHelperFactory_6 };
+                    } catch (CommandException e) {
+                        ExceptionUtil.log(e, Messages.InputHelperFactory_1);
+                        return new String[] { Messages.InputHelperFactory_6 };
                     }
                 }
             };

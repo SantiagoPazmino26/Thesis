@@ -31,11 +31,13 @@ import sernet.gs.ui.rcp.main.bsi.dnd.transfer.BausteinUmsetzungTransfer;
 import sernet.gs.ui.rcp.main.bsi.dnd.transfer.IBSIStrukturElementTransfer;
 import sernet.gs.ui.rcp.main.bsi.dnd.transfer.ISO27kElementTransfer;
 import sernet.gs.ui.rcp.main.bsi.dnd.transfer.ISO27kGroupTransfer;
+import sernet.verinice.dataprotection.dnd.transfer.DataProtectionModelingTransfer;
 import sernet.verinice.model.bp.IBpElement;
 import sernet.verinice.model.bsi.BausteinUmsetzung;
 import sernet.verinice.model.bsi.IBSIStrukturElement;
 import sernet.verinice.model.bsi.IMassnahmeUmsetzung;
 import sernet.verinice.model.bsi.ITVerbund;
+import sernet.verinice.model.dataprotection.IDpElement;
 import sernet.verinice.model.iso27k.IISO27kElement;
 
 public class BSIModelViewDragListener implements DragSourceListener {
@@ -90,7 +92,8 @@ public class BSIModelViewDragListener implements DragSourceListener {
                 || element instanceof IBSIStrukturElement 
                 || element instanceof IISO27kElement 
                 || element instanceof IMassnahmeUmsetzung
-                || element instanceof IBpElement)
+                || element instanceof IBpElement
+                || element instanceof IDpElement)
                 && !(element instanceof ITVerbund);
     }
 	
@@ -105,7 +108,8 @@ public class BSIModelViewDragListener implements DragSourceListener {
                 || BausteinUmsetzungTransfer.getInstance().isSupportedType(event.dataType)
                 || ISO27kElementTransfer.getInstance().isSupportedType(event.dataType)
                 || ISO27kGroupTransfer.getInstance().isSupportedType(event.dataType)
-                || BaseProtectionElementTransfer.getInstance().isSupportedType(event.dataType));
+                || BaseProtectionElementTransfer.getInstance().isSupportedType(event.dataType)
+                || DataProtectionModelingTransfer.getInstance().isSupportedType(event.dataType));
 	}
 
 }

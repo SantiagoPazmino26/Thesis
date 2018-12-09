@@ -9,11 +9,14 @@ import sernet.hui.common.connect.PropertyList;
 import sernet.hui.common.connect.PropertyType;
 import sernet.hui.common.multiselectionlist.IMLPropertyOption;
 import sernet.verinice.interfaces.IReevaluatorProtectionGoals;
+import sernet.verinice.model.bsi.CnaStructureHelper;
 import sernet.verinice.model.bsi.IBSIStrukturElement;
 import sernet.verinice.model.bsi.MaximumProtectionRequirementsListener;
 import sernet.verinice.model.bsi.TagHelper;
 import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.ILinkChangeListener;
+import sernet.verinice.model.ds.IDatenschutzElement;
+
 import org.apache.log4j.Logger;
 
 public class DataProcess extends CnATreeElement
@@ -92,6 +95,11 @@ implements IDpElement {
 	@Override
 	public void addChild(CnATreeElement child) {
 		// Person doesn't have children
+	}
+	
+	@Override
+	public boolean canContain(Object obj) {
+		return CnaStructureHelper.canContain(obj);
 	}
 
 	public IReevaluatorProtectionGoals getProtectionGoalsProvider() {

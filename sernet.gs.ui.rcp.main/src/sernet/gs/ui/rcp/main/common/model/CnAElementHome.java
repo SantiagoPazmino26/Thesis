@@ -59,6 +59,9 @@ import sernet.verinice.model.common.CnALink;
 import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.Permission;
 import sernet.verinice.model.common.configuration.Configuration;
+import sernet.verinice.model.dataprotection.DataProtectionModel;
+import sernet.verinice.model.dataprotection.DataStakeholder;
+import sernet.verinice.model.dataprotection.IDpElement;
 import sernet.verinice.model.iso27k.IISO27kElement;
 import sernet.verinice.model.iso27k.ISO27KModel;
 import sernet.verinice.model.iso27k.ImportIsoGroup;
@@ -363,6 +366,13 @@ public final class CnAElementHome {
         return command.getElements();
 
     }
+    
+    public List<DataStakeholder> getDataStakeholders() throws CommandException {
+        LoadCnAElementByType<DataStakeholder> command = new LoadCnAElementByType<DataStakeholder>(DataStakeholder.class);
+        command = getCommandService().executeCommand(command);
+        return command.getElements();
+
+    }
 
     public List<String> getTags() throws CommandException {
         FindAllTags command = new FindAllTags();
@@ -423,7 +433,7 @@ public final class CnAElementHome {
      */
     public boolean isNewChildAllowed(CnATreeElement cte) {
         return cte instanceof BSIModel || cte instanceof ISO27KModel || cte instanceof BpModel
-                || cte instanceof CatalogModel
+                || cte instanceof CatalogModel || cte instanceof DataProtectionModel
                 || isWriteAllowed(cte);
     }
 
@@ -530,7 +540,7 @@ public final class CnAElementHome {
                 } // end for ISO 27k elements
                 
                 // backwards compatibility: BSI elements can be linked without a defined relation type, but we use one if present:
-                boolean bsiHandlingNeeded = dropTarget instanceof IBSIStrukturElement || droppedElement instanceof IBSIStrukturElement || dropTarget instanceof BausteinUmsetzung;
+                boolean bsiHandlingNeeded = dropTarget instanceof IBSIStrukturElement || droppedElement instanceof IBSIStrukturElement || dropTarget instanceof BausteinUmsetzung || dropTarget instanceof IDpElement;
                 bsiHandlingNeeded = bsiHandlingNeeded || droppedElement instanceof BausteinUmsetzung || dropTarget instanceof MassnahmenUmsetzung;
                 bsiHandlingNeeded = bsiHandlingNeeded || droppedElement instanceof MassnahmenUmsetzung;
                 if ( bsiHandlingNeeded ) {
@@ -557,7 +567,10 @@ public final class CnAElementHome {
             }
             if (link.getDependant() instanceof IISO27kElement || link.getDependency() instanceof IISO27kElement) {
                 CnAElementFactory.getInstance().getISO27kModel().linkAdded(link);
-            }                 
+            }
+            if (link.getDependant() instanceof IDpElement || link.getDependency() instanceof IDpElement) {
+                CnAElementFactory.getInstance().getDataProtectionModel().linkAdded(link);
+            }   
         }
         DNDItems.clear();
     }

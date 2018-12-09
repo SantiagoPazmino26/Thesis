@@ -27,7 +27,7 @@ import sernet.verinice.model.bsi.IBSIStrukturElement;
 import sernet.verinice.model.bsi.MassnahmenUmsetzung;
 import sernet.verinice.model.common.CnATreeElement;
 
-class CnAElementByTitelSorter extends ViewerSorter {
+public class CnAElementByTitelSorter extends ViewerSorter {
 		private NumericStringComparator numComp = new NumericStringComparator();
 		
 		@Override

@@ -91,6 +91,7 @@ import sernet.verinice.model.dataprotection.DataProcessKategorie;
 import sernet.verinice.model.dataprotection.DataStakeholder;
 import sernet.verinice.model.dataprotection.DataStakeholderKategorie;
 import sernet.verinice.model.dataprotection.IDpElement;
+import sernet.verinice.model.dataprotection.IDpKategorie;
 import sernet.verinice.model.ds.Datenverarbeitung;
 import sernet.verinice.model.ds.IDatenschutzElement;
 import sernet.verinice.model.ds.Personengruppen;
@@ -376,7 +377,8 @@ public final class CnATypeMapper {
         if (IBpElement.class.isAssignableFrom(clazz)) {
             return Domain.BASE_PROTECTION;
         }
-        if (IDpElement.class.isAssignableFrom(clazz)) {
+        if (IDpElement.class.isAssignableFrom(clazz)
+        		|| IDpKategorie.class.isAssignableFrom(clazz)) {
             return Domain.DATA_PROTECTION_NEW;
         }
         if (IISO27kElement.class.isAssignableFrom(clazz)) {

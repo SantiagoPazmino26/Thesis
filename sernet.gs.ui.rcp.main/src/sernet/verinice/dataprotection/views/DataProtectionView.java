@@ -48,6 +48,7 @@ import sernet.gs.ui.rcp.main.bsi.editors.AttachmentEditor;
 import sernet.gs.ui.rcp.main.bsi.editors.AttachmentEditorInput;
 import sernet.gs.ui.rcp.main.bsi.editors.BSIElementEditorInput;
 import sernet.gs.ui.rcp.main.bsi.editors.EditorFactory;
+import sernet.gs.ui.rcp.main.bsi.views.CnAElementByTitelSorter;
 import sernet.gs.ui.rcp.main.common.model.CnAElementFactory;
 import sernet.gs.ui.rcp.main.common.model.IModelLoadListener;
 import sernet.gs.ui.rcp.main.preferences.PreferenceConstants;
@@ -77,6 +78,9 @@ import sernet.verinice.rcp.tree.TreeContentProvider;
 import sernet.verinice.rcp.tree.TreeLabelProvider;
 import sernet.verinice.rcp.tree.TreeUpdateListener;
 import sernet.verinice.service.tree.ElementManager;
+import sernet.verinice.dataprotection.dnd.DataProtectionViewDropListener;
+import sernet.verinice.dataprotection.dnd.transfer.DataProtectionElementTransfer;
+import sernet.verinice.dataprotection.dnd.transfer.DataProtectionModelingTransfer;
 import sernet.verinice.dataprotection.perspective.DataProtectionPerspective;
 import sernet.verinice.bp.rcp.BaseProtectionTreeSorter;
 import sernet.verinice.bp.rcp.BbModelingDropPerformer;
@@ -150,7 +154,7 @@ protected void initView(Composite parent) {
     viewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
     viewer.setContentProvider(contentProvider);
     viewer.setLabelProvider(new DecoratingLabelProvider(new TreeLabelProvider(), workbench.getDecoratorManager()));
-    viewer.setSorter(new BaseProtectionTreeSorter());
+    viewer.setSorter(new CnAElementByTitelSorter());
     toggleLinking(Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.LINK_TO_EDITOR));
 
     getSite().setSelectionProvider(viewer);
@@ -257,10 +261,10 @@ private void hookContextMenu() {
 }
 
 private void hookDndListeners() {
-    Transfer[] dragTypes = new Transfer[] { BaseProtectionElementTransfer.getInstance() };
-    Transfer[] dropTypes = new Transfer[] { IGSModelElementTransfer.getInstance(),
-            BaseProtectionElementTransfer.getInstance(),
-            BaseProtectionModelingTransfer.getInstance()};
+	int operations = DND.DROP_COPY | DND.DROP_MOVE;
+    Transfer[] dragTypes = new Transfer[] { DataProtectionElementTransfer.getInstance() };
+    Transfer[] dropTypes = new Transfer[] { DataProtectionElementTransfer.getInstance(),
+            DataProtectionModelingTransfer.getInstance()};
 
     viewer.addDragSupport(operations, dragTypes, new BSIModelViewDragListener(viewer));
     viewer.addDropSupport(operations, dropTypes, metaDropAdapter);
@@ -298,15 +302,10 @@ private void makeActions() {
     bulkEditAction = new ShowBulkEditAction(getViewSite().getWorkbenchWindow(), 
             Messages.DataProtectionView_BulkEdit);
           
-    BSIModelViewDropListener bsiDropAdapter;
+    DataProtectionViewDropListener dpDropAdapter;
     metaDropAdapter = new MetaDropAdapter(viewer);
-    bsiDropAdapter = new BSIModelViewDropListener(viewer);
-    BbModelingDropPerformer modelingDropPerformer = new BbModelingDropPerformer();
-    GsCatalogModelingDropPerformer gsCatalogModelingDropPerformer = 
-            new GsCatalogModelingDropPerformer();
-    metaDropAdapter.addAdapter(modelingDropPerformer);
-    metaDropAdapter.addAdapter(bsiDropAdapter);
-    metaDropAdapter.addAdapter(gsCatalogModelingDropPerformer);
+    dpDropAdapter = new DataProtectionViewDropListener(viewer);
+    metaDropAdapter.addAdapter(dpDropAdapter);
     
     linkWithEditorAction = new Action(Messages.DataProtectionView_LinkWithEditor, IAction.AS_CHECK_BOX) {
         @Override

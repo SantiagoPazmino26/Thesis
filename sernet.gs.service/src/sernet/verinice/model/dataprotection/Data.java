@@ -15,11 +15,13 @@ import sernet.hui.common.connect.PropertyList;
 import sernet.hui.common.connect.PropertyType;
 import sernet.hui.common.multiselectionlist.IMLPropertyOption;
 import sernet.verinice.interfaces.IReevaluatorProtectionGoals;
+import sernet.verinice.model.bsi.CnaStructureHelper;
 import sernet.verinice.model.bsi.IBSIStrukturElement;
 import sernet.verinice.model.bsi.MaximumProtectionRequirementsListener;
 import sernet.verinice.model.bsi.TagHelper;
 import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.ILinkChangeListener;
+import sernet.verinice.model.ds.IDatenschutzElement;
 
 public class Data extends CnATreeElement
 implements IDpElement {
@@ -66,6 +68,11 @@ implements IDpElement {
 			return ""; //$NON-NLS-1$
 		}
 		return getTitel(getEntity());
+	}
+	
+	@Override
+	public boolean canContain(Object obj) {
+		return CnaStructureHelper.canContain(obj);
 	}
 	
 	public static String getTitel(Entity entity) {

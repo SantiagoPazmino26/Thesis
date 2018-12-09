@@ -41,6 +41,7 @@ import sernet.verinice.model.bp.IBpElement;
 import sernet.verinice.model.bsi.BausteinUmsetzung;
 import sernet.verinice.model.bsi.IBSIStrukturElement;
 import sernet.verinice.model.bsi.IMassnahmeUmsetzung;
+import sernet.verinice.model.dataprotection.IDpElement;
 import sernet.verinice.model.iso27k.IISO27kElement;
 import sernet.verinice.service.iso27k.Item;
 
@@ -59,7 +60,8 @@ public final class DNDHelper {
                                              IISO27kElement.class,
                                              IMassnahmeUmsetzung.class,
                                              Item.class,
-                                             IBpElement.class};
+                                             IBpElement.class,
+                                             IDpElement.class};
    
     
     private static final String STD_ERR_MSG = "Error while casting dnd list";

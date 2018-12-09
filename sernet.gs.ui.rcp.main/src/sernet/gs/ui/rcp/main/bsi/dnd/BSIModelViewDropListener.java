@@ -53,6 +53,7 @@ import sernet.gs.ui.rcp.main.common.model.CnAElementHome;
 import sernet.gs.ui.rcp.main.service.ServiceFactory;
 import sernet.hui.common.VeriniceContext;
 import sernet.springclient.RightsServiceClient;
+import sernet.verinice.dataprotection.dnd.transfer.DataProtectionElementTransfer;
 import sernet.verinice.interfaces.ActionRightIDs;
 import sernet.verinice.interfaces.CnATreeElementBuildException;
 import sernet.verinice.interfaces.CommandException;
@@ -69,6 +70,8 @@ import sernet.verinice.model.bsi.IBSIStrukturKategorie;
 import sernet.verinice.model.bsi.IMassnahmeUmsetzung;
 import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.Permission;
+import sernet.verinice.model.dataprotection.IDpElement;
+import sernet.verinice.model.dataprotection.IDpKategorie;
 import sernet.verinice.model.iso27k.IISO27kElement;
 import sernet.verinice.model.iso27k.IISO27kGroup;
 import sernet.verinice.service.commands.SaveElement;
@@ -177,7 +180,8 @@ public class BSIModelViewDropListener extends ViewerDropAdapter implements Right
             || element instanceof BausteinUmsetzung 
             || element instanceof IISO27kElement 
             || element instanceof IMassnahmeUmsetzung 
-            || element instanceof IBpElement;
+            || element instanceof IBpElement
+        	|| element instanceof IDpElement;
     }
 
     @Override
@@ -235,6 +239,13 @@ public class BSIModelViewDropListener extends ViewerDropAdapter implements Right
             isActive=false;
             return isActive;
         }
+        if (target instanceof IDpKategorie){
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Target is DP category ... return false");
+            }
+            isActive=false;
+            return isActive;
+        }
 
         if (target instanceof BausteinUmsetzung
                 && ISO27kElementTransfer.getInstance().isSupportedType(transferData)) {
@@ -254,6 +265,12 @@ public class BSIModelViewDropListener extends ViewerDropAdapter implements Right
             isActive = true;
             if (LOG.isDebugEnabled()) {
                 LOG.debug("target is IBSIStrukturElement,  isSupportedData return false");
+            }
+            return isActive;
+        }else if (target instanceof IDpElement && isSupportedData(transferData)) {
+            isActive = true;
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("target is IDpElement,  isSupportedData return false");
             }
             return isActive;
         }
@@ -496,7 +513,7 @@ public class BSIModelViewDropListener extends ViewerDropAdapter implements Right
 
     private boolean isSupportedData(TransferData transferType) {
         boolean retVal = IGSModelElementTransfer.getInstance().isSupportedType(transferType) || IBSIStrukturElementTransfer.getInstance().isSupportedType(transferType) || BausteinUmsetzungTransfer.getInstance().isSupportedType(transferType);
-        retVal = retVal || ISO27kElementTransfer.getInstance().isSupportedType(transferType) || ISO27kGroupTransfer.getInstance().isSupportedType(transferType);
+        retVal = retVal || ISO27kElementTransfer.getInstance().isSupportedType(transferType) || ISO27kGroupTransfer.getInstance().isSupportedType(transferType) || DataProtectionElementTransfer.getInstance().isSupportedType(transferType);
         return retVal;
     }
 

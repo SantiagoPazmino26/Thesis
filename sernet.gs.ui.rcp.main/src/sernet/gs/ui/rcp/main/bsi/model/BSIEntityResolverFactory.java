@@ -27,6 +27,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import sernet.gs.service.RuntimeCommandException;
+import sernet.gs.ui.rcp.main.common.model.DataStakeholderEntityOptionWrapper;
 import sernet.gs.ui.rcp.main.common.model.PersonEntityOptionWrapper;
 import sernet.gs.ui.rcp.main.service.ServiceFactory;
 import sernet.hui.common.connect.Entity;
@@ -46,6 +47,7 @@ import sernet.verinice.interfaces.CommandException;
 import sernet.verinice.model.bsi.Person;
 import sernet.verinice.model.common.CnATreeElement;
 import sernet.verinice.model.common.configuration.Configuration;
+import sernet.verinice.model.dataprotection.DataStakeholder;
 import sernet.verinice.service.commands.LoadEntitiesByIds;
 import sernet.verinice.service.commands.SaveElement;
 import sernet.verinice.service.commands.crud.LoadCnAElementByEntityUuid;
@@ -76,11 +78,13 @@ public class BSIEntityResolverFactory implements IEntityResolverFactory {
     
     private static IReferenceResolver roleResolver;
     private static IReferenceResolver personResolver;
+    private static IReferenceResolver dataStakeholderResolver;
     private static IUrlResolver urlresolver;
     
     public void createResolvers(HUITypeFactory typeFactory) {
         createPersonResolver();
         createRoleResolver();
+        createDataStakeholderResolver();
 
         // set person resolver for all properties that reference persons:
         Collection<EntityType> allEntityTypes = typeFactory.getAllEntityTypes();
@@ -89,12 +93,14 @@ public class BSIEntityResolverFactory implements IEntityResolverFactory {
 
             addPersonResolverToTypes(typeFactory, entityType, propertyTypes);
             addRoleResolverToTypes(typeFactory, entityType, propertyTypes);
+            addDataStakeholderResolverToTypes(typeFactory, entityType, propertyTypes);
 
             List<PropertyGroup> groups = entityType.getPropertyGroups();
             for (PropertyGroup group : groups) {
                 List<PropertyType> typesInGroup = group.getPropertyTypes();
                 addPersonResolverToTypes(typeFactory, entityType, typesInGroup);
                 addRoleResolverToTypes(typeFactory, entityType, typesInGroup);
+                addDataStakeholderResolverToTypes(typeFactory, entityType, propertyTypes);
             }
         }
 
@@ -121,6 +127,15 @@ public class BSIEntityResolverFactory implements IEntityResolverFactory {
             if (propertyType.isReference() && 
                     propertyType.getReferencedEntityTypeId().equals(Configuration.ROLE_TYPE_ID)) {
                 typeFactory.getPropertyType(entityType.getId(), propertyType.getId()).setReferenceResolver(roleResolver);
+            }
+        }
+    }
+    
+    private void addDataStakeholderResolverToTypes(HUITypeFactory typeFactory, EntityType entityType, List<PropertyType> propertyTypes) {
+        for (PropertyType propertyType : propertyTypes) {
+            if (propertyType.isReference() &&
+                    propertyType.getReferencedEntityTypeId().equals(DataStakeholder.TYPE_ID)) {
+                typeFactory.getPropertyType(entityType.getId(), propertyType.getId()).setReferenceResolver(dataStakeholderResolver);
             }
         }
     }
@@ -302,4 +317,77 @@ public class BSIEntityResolverFactory implements IEntityResolverFactory {
         }
 
     }
+    
+    private void createDataStakeholderResolver() {
+        if (dataStakeholderResolver == null) {
+        	dataStakeholderResolver = new IReferenceResolver() {
+
+                public List<IMLPropertyOption> getAllEntitesForType(String entityTypeID) {
+
+                    List<IMLPropertyOption> result = new ArrayList<IMLPropertyOption>();
+
+                    LoadCnAElementByType<DataStakeholder> command = new LoadCnAElementByType<DataStakeholder>(DataStakeholder.class);
+
+                    try {
+                        command = ServiceFactory.lookupCommandService().executeCommand(command);
+
+                        List<DataStakeholder> stakeholders = command.getElements();
+
+                        for (DataStakeholder stakeholder : stakeholders) {
+                            result.add(new DataStakeholderEntityOptionWrapper(stakeholder.getEntity()));
+                        }
+
+                    } catch (Exception e) {
+                    	LOG.error("Error while loading element", e); //$NON-NLS-1$
+                        throw new RuntimeCommandException(STD_ERR_MSG, e); //$NON-NLS-1$
+                    }
+                    return result;
+                }
+
+                public void addNewEntity(Entity parentEntity, String name) {
+                    // not supported, do nothing
+                }
+
+                public List<IMLPropertyOption> getReferencedEntitesForType(String referencedEntityTypeId, List<Property> references) {
+
+                    List<IMLPropertyOption> result = new ArrayList<IMLPropertyOption>();
+
+                    List<Integer> dbIds = new ArrayList<Integer>();
+                    for (Property prop : references) {
+                        dbIds.add(Integer.parseInt(prop.getPropertyValue()));
+                    }
+                    LoadEntitiesByIds command = new LoadEntitiesByIds(dbIds);
+
+                    try {
+                        command = ServiceFactory.lookupCommandService().executeCommand(command);
+
+                        List<Entity> stakeholders = command.getEntities();
+
+                        for (Entity stakeholder : stakeholders) {
+                            result.add(new DataStakeholderEntityOptionWrapper(stakeholder));
+                        }
+
+                    } catch (Exception e) {
+                    	LOG.error("Error while loading elements", e); //$NON-NLS-1$
+                        throw new RuntimeCommandException(STD_ERR_MSG, e); //$NON-NLS-1$
+                    }
+                    return result;
+
+                }
+
+                @Override
+                public void createLinks(String referencedEntityType, String linkType, String entityUuid) {
+                 // do nothing, not implemented for persons
+                }
+
+                @Override
+                public String getTitlesOfLinkedObjects(String referencedCnaLinkType, String entityUuid) {
+                    // not implemented
+                    return null;
+                }
+            };
+        }
+    }
+
+    
 }

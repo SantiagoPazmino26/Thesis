@@ -3,6 +3,7 @@ package sernet.verinice.model.dataprotection;
 import java.util.Collection;
 
 import sernet.hui.common.connect.ITaggableElement;
+import sernet.verinice.model.bsi.BausteinUmsetzung;
 import sernet.verinice.model.bsi.TagHelper;
 import sernet.verinice.model.common.CnATreeElement;
 
@@ -46,7 +47,10 @@ public class DataNetwork extends CnATreeElement implements IDpElement, ITaggable
     
     @Override
     public boolean canContain(Object object) {
-        return object instanceof DataKategorie || object instanceof DataProcessKategorie || object instanceof DataStakeholderKategorie
+        return object instanceof DataKategorie 
+        		|| object instanceof DataProcessKategorie 
+        		|| object instanceof DataStakeholderKategorie
+        		|| object instanceof BausteinUmsetzung
                 ;
     }
 

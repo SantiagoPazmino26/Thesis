@@ -35,7 +35,7 @@ import sernet.verinice.iso27k.rcp.action.MetaDropAdapter;
  * are dragged from sernet.verinice.rcp.catalog.CatalogView 
  * and dropped on an element in BaseProtectionView.
  * 
- * @see BbModelingDropPerformer
+ * @see DataProtectionModelingDropPerformer
  * @see MetaDropAdapter
  *
  * @author Daniel Murygin <dm{a}sernet{dot}de>

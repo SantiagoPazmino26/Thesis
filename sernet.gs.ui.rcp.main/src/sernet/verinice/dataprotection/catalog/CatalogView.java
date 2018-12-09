@@ -75,6 +75,8 @@ import sernet.verinice.rcp.IAttachedToPerspective;
 import sernet.verinice.rcp.RightsEnabledView;
 import sernet.verinice.rcp.ViewFilterAction;
 import sernet.verinice.rcp.catalog.CatalogDragListener;
+import sernet.verinice.dataprotection.dnd.CatalogViewDragListener;
+import sernet.verinice.dataprotection.dnd.transfer.DataProtectionModelingTransfer;
 import sernet.verinice.dataprotection.perspective.DataProtectionPerspective;
 import sernet.verinice.rcp.tree.TreeContentProvider;
 import sernet.verinice.rcp.tree.TreeLabelProvider;
@@ -195,8 +197,8 @@ public class CatalogView extends RightsEnabledView implements IAttachedToPerspec
 
     private void addDndListeners() {
         int ops = DND.DROP_COPY | DND.DROP_MOVE;
-        Transfer[] transfers = new Transfer[] { BaseProtectionModelingTransfer.getInstance() };
-        viewer.addDragSupport(ops, transfers, new CatalogDragListener(viewer));
+        Transfer[] transfers = new Transfer[] { DataProtectionModelingTransfer.getInstance() };
+        viewer.addDragSupport(ops, transfers, new CatalogViewDragListener(viewer));
     }
 
     protected void startInitDataJob() {

@@ -15,6 +15,7 @@ import sernet.hui.common.connect.PropertyList;
 import sernet.hui.common.connect.PropertyType;
 import sernet.hui.common.multiselectionlist.IMLPropertyOption;
 import sernet.verinice.interfaces.IReevaluatorProtectionGoals;
+import sernet.verinice.model.bsi.CnaStructureHelper;
 import sernet.verinice.model.bsi.IBSIStrukturElement;
 import sernet.verinice.model.bsi.MaximumProtectionRequirementsListener;
 import sernet.verinice.model.bsi.TagHelper;
@@ -89,6 +90,11 @@ implements IDpElement {
 	@Override
 	public String getTypeId() {
 		return TYPE_ID;
+	}
+	
+	@Override
+	public boolean canContain(Object obj) {
+		return CnaStructureHelper.canContain(obj);
 	}
 	
 	@Override

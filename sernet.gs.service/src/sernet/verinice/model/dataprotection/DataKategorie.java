@@ -4,7 +4,7 @@ package sernet.verinice.model.dataprotection;
 import sernet.verinice.model.common.CnATreeElement;
 
 public class DataKategorie extends CnATreeElement 
-implements IDpElement {
+implements IDpKategorie {
 	
     private static final long serialVersionUID = 1L;
     public static final String TYPE_ID = "datakategorie"; //$NON-NLS-1$

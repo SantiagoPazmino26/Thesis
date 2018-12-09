@@ -30,11 +30,13 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.dnd.TransferData;
 
+import sernet.verinice.dataprotection.dnd.transfer.DataProtectionElementTransfer;
 import sernet.verinice.model.bp.IBpElement;
 import sernet.verinice.model.bp.IBpGroup;
 import sernet.verinice.model.bsi.BausteinUmsetzung;
 import sernet.verinice.model.bsi.IBSIStrukturElement;
 import sernet.verinice.model.bsi.IMassnahmeUmsetzung;
+import sernet.verinice.model.dataprotection.IDpElement;
 import sernet.verinice.model.iso27k.IISO27kElement;
 
 /**
@@ -79,6 +81,22 @@ public class TransferUtil {
                 elements.addAll(Arrays.asList((IBpElement[]) data));
             } else if (data instanceof IBpElement) {
                 elements.add((IBpElement) data);
+            }
+            write(transfer, transferData, elements);
+        }     
+    }
+    
+    public static void dataProtectionElementToNative(DataProtectionElementTransfer transfer, Object data,
+            TransferData transferData) {
+        if (data == null || !(transfer.validateData(data))) {
+            return;
+        }
+        if (transfer.isSupportedType(transferData)) {
+            ArrayList<IDpElement> elements = new ArrayList<>();
+            if (data instanceof IDpElement[]) {
+                elements.addAll(Arrays.asList((IDpElement[]) data));
+            } else if (data instanceof IDpElement) {
+                elements.add((IDpElement) data);
             }
             write(transfer, transferData, elements);
         }     

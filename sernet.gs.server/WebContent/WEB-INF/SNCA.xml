@@ -10939,7 +10939,26 @@ Wurden bereits weitere Stellen informiert?
         <huiproperty
             name="Stakes"
             inputtype="text"
-            id="data_network_stakes"/>                                                        
+            id="data_network_stakes"/>  
+
+         <huiproperty
+            id="data_network_controller_link"
+            name="Controller"
+            inputtype="reference"
+            required="true">
+                <references
+                    entitytype="data_stakeholder"/>
+        </huiproperty>
+        
+         <huiproperty
+            id="data_network_processor_link"
+            name="Processor"
+            inputtype="reference"
+            required="true">
+                <references
+                    entitytype="data_stakeholder"/>
+        </huiproperty>                                                                  
+                                                                          
                   
 	    <huipropertygroup id="data_network_lawfulness_1" name="Lawfulness criteria 1">
         <huiproperty
@@ -11386,27 +11405,9 @@ Wurden bereits weitere Stellen informiert?
                     id="data_type_sensitive"/>
                 <option
                     id="data_type_personal"/>
-        </huiproperty>        
+        </huiproperty>              
         <huiproperty
-            name="Personal Identifying Information"
-            id="data_ppi"
-            inputtype="singleoption">
-                <option
-                    id="data_ppi_true"/>
-                <option
-                    id="data_ppi_false"/>
-        </huiproperty>
-        <huiproperty
-            name="Consent to collect"
-            id="data_consent"
-            inputtype="singleoption">
-                <option
-                    id="data_consent_true"/>
-                <option
-                    id="data_consent_false"/>
-        </huiproperty>        
-        <huiproperty
-            name="Type of Information"
+            name="Type of collection"
             id="data_information_type"
             inputtype="singleoption">
                 <option
@@ -11626,16 +11627,6 @@ Wurden bereits weitere Stellen informiert?
             id="data_process_erlaeuterung"/>
         <huiproperty id="data_process_document" isURL="true" name="Process diagram" />                                 
         <huiproperty
-            name="Process type"
-            id="data_process_type"
-            inputtype="singleoption">
-                <option
-                    id="data_process_type_none"
-                    name="" />
-                <option
-                    id="data_process_type_technical"/>
-        </huiproperty>  
-        <huiproperty
             name="Purposes"
             inputtype="text"
             id="data_process_purposes"/>
@@ -11792,6 +11783,9 @@ Wurden bereits weitere Stellen informiert?
         <huirelation to="data" id="rel_data_stakeholder_data"
             name="verantwortlich für" reversename="Verantwortlicher" />
 
+        <huirelation to="data_stakeholder" id="rel_data_stakeholder_data_stakeholder"
+            name="verantwortlich für" reversename="Verantwortlicher" />
+
         <huiproperty
             name="Kürzel"
             id="data_stakeholder_kuerzel"
@@ -11842,8 +11836,6 @@ Wurden bereits weitere Stellen informiert?
             name="Dokument"
             id="data_stakeholder_dokument"
             isURL="true" />
-    </huientity>
-    
-    
+    </huientity>            
     
 </huientities>
