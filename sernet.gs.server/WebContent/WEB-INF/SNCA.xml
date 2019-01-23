@@ -11727,7 +11727,7 @@ Wurden bereits weitere Stellen informiert?
                     id="data_process_unlinkability_sehrhoch"
                     name="Sehr Hoch" />
             </huiproperty>
-            <huiproperty
+            <!-- <huiproperty
                 id="data_process_minimization"
                 name="Data Minimization"
                 inputtype="singleoption">
@@ -11741,7 +11741,7 @@ Wurden bereits weitere Stellen informiert?
                 <option
                     id="data_process_minimization_sehrhoch"
                     name="Sehr Hoch" />
-            </huiproperty> 
+            </huiproperty> --> 
             <huiproperty
                 name="Begründung Vertraulichkeit"
                 inputtype="text"
